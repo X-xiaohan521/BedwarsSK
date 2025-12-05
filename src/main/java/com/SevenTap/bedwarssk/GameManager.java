@@ -8,22 +8,18 @@ import org.bukkit.scoreboard.*;
 import java.util.*;
 
 public class GameManager {
+    private static GameManager instance;
 
     private int playerCount = 8; // 默认8人
     private boolean emperorShown = true; // 默认显示主公
     private boolean gameStarted = false;
 
-    // 存储玩家身份 - 修复Diamond操作符
-    private final Map<String, Role> playerRoles = new HashMap<String, Role>();
-    // 存储玩家状态 - 修复Diamond操作符
-    private final Map<String, PlayerStatus> playerStatus = new HashMap<String, PlayerStatus>();
-    // 主公玩家
+    private final Map<String, Role> playerRoles = new HashMap<>();
+    private final Map<String, PlayerStatus> playerStatus = new HashMap<>();
+    
     private String emperorPlayer;
-
-    // 计分板相关
     private Scoreboard scoreboard;
 
-    // Role枚举定义
     public enum Role {
         EMPEROR("主公", ChatColor.RED, "消灭所有反贼和内奸"),
         LOYALIST("忠臣", ChatColor.BLUE, "保护主公，消灭反贼和内奸"),
@@ -53,11 +49,10 @@ public class GameManager {
         }
     }
 
-    // 玩家状态枚举
     public enum PlayerStatus {
         ALIVE("存活"),
         BED_BROKEN("床被破坏"),
-        DEAD("死亡");
+        FINAL_DEAD("最终死亡");
 
         private final String display;
 
@@ -71,11 +66,16 @@ public class GameManager {
     }
 
     public GameManager() {
+        instance = this;
         // 初始化计分板
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         if (manager != null) {
             scoreboard = manager.getNewScoreboard();
         }
+    }
+
+    public static GameManager getGameManager() {
+        return instance;
     }
 
     public void setPlayerCount(int count) {
@@ -137,8 +137,7 @@ public class GameManager {
     }
 
     private List<Role> generateRoles() {
-        // 修复Diamond操作符
-        List<Role> roles = new ArrayList<Role>();
+        List<Role> roles = new ArrayList<>();
 
         switch (playerCount) {
             case 5:
@@ -213,7 +212,6 @@ public class GameManager {
         return playerRoles.get(player.getName());
     }
 
-    // 修复：添加getAllRoles方法
     public Map<String, Role> getAllRoles() {
         return new HashMap<String, Role>(playerRoles);
     }
@@ -236,7 +234,6 @@ public class GameManager {
         gameStarted = false;
         emperorPlayer = null;
 
-        // 重置玩家显示名称
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.setDisplayName(player.getName());
             player.setPlayerListName(player.getName());
@@ -245,7 +242,6 @@ public class GameManager {
         Bukkit.broadcastMessage(ChatColor.GREEN + "游戏已重置!");
     }
 
-    // 床被破坏时的处理 - 暂时留空，等BedWars事件正常后再实现
     public void onBedDestroyed(List<Player> victimPlayers) {
         for (Player player : victimPlayers) {
             if (!gameStarted || !playerRoles.containsKey(player.getName())) return;
@@ -253,15 +249,15 @@ public class GameManager {
         }
     }
 
-    // 玩家死亡时的处理 - 暂时留空，等BedWars事件正常后再实现
     public void onPlayerDeath(Player player) {
         if (!gameStarted || !playerRoles.containsKey(player.getName())) return;
 
         PlayerStatus status = playerStatus.get(player.getName());
-        if (status == PlayerStatus.BED_BROKEN || status == PlayerStatus.DEAD) {
-            playerStatus.put(player.getName(), PlayerStatus.DEAD);
-            Role role = playerRoles.get(player.getName());
+        if (status == PlayerStatus.BED_BROKEN) {
+            playerStatus.put(player.getName(), PlayerStatus.FINAL_DEAD);
 
+            // 玩家最终死亡信息（仅供测试，生产代码删除）
+            Role role = playerRoles.get(player.getName());
             Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " (" +
                     role.getDisplayName() + ChatColor.RED + ") 已被淘汰!");
         }
@@ -270,5 +266,53 @@ public class GameManager {
     // 获取计分板（如果需要）
     public Scoreboard getScoreboard() {
         return scoreboard;
+    }
+
+    private void announceVictory(Role winningRole) {
+        gameStarted = false;
+        
+        Bukkit.broadcastMessage(ChatColor.GOLD + "=================================");
+        Bukkit.broadcastMessage(ChatColor.GOLD + "游戏结束!");
+        
+        switch (winningRole) {
+            case EMPEROR:
+                Bukkit.broadcastMessage(ChatColor.RED + "主公阵营胜利!");
+                // 显示所有忠臣
+                for (Map.Entry<String, Role> entry : playerRoles.entrySet()) {
+                    if (entry.getValue() == Role.LOYALIST) {
+                        Bukkit.broadcastMessage(ChatColor.BLUE + "忠臣: " + entry.getKey());
+                    }
+                }
+                break;
+            case REBEL:
+                Bukkit.broadcastMessage(ChatColor.GREEN + "反贼阵营胜利!");
+                // 显示所有反贼
+                for (Map.Entry<String, Role> entry : playerRoles.entrySet()) {
+                    if (entry.getValue() == Role.REBEL) {
+                        Bukkit.broadcastMessage(ChatColor.GREEN + "反贼: " + entry.getKey());
+                    }
+                }
+                break;
+            case TRAITOR:
+                Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "内奸胜利!");
+                // 显示内奸
+                for (Map.Entry<String, Role> entry : playerRoles.entrySet()) {
+                    if (entry.getValue() == Role.TRAITOR) {
+                        Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "内奸: " + entry.getKey());
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        
+        Bukkit.broadcastMessage(ChatColor.GOLD + "=================================");
+        
+        // 显示所有玩家身份
+        Bukkit.broadcastMessage(ChatColor.YELLOW + "=== 所有玩家身份 ===");
+        for (Map.Entry<String, Role> entry : playerRoles.entrySet()) {
+            Bukkit.broadcastMessage(entry.getValue().getColor() + entry.getKey() + 
+                ": " + entry.getValue().getDisplayName());
+        }
     }
 }

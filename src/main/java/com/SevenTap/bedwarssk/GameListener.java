@@ -1,30 +1,34 @@
 package com.SevenTap.bedwarssk;
 
+import com.andrei1058.bedwars.api.arena.GameState;
+import com.andrei1058.bedwars.api.events.gameplay.GameStateChangeEvent;
 import com.andrei1058.bedwars.api.events.player.PlayerBedBreakEvent;
 import com.andrei1058.bedwars.api.events.player.PlayerKillEvent;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 public class GameListener implements Listener {
 
     private final BedwarsSKPlugin plugin;
+    private final GameManager gameManager;
 
     public GameListener() {
         this.plugin = BedwarsSKPlugin.getInstance();
+        this.gameManager = GameManager.getGameManager();
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        // 玩家加入时的处理
-    }
-
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
-        // 如果游戏进行中玩家退出，视为死亡
-        if (plugin.getGameManager() != null && plugin.getGameManager().isGameStarted()) {
-            plugin.getGameManager().onPlayerDeath(event.getPlayer());
+    public void onGameStart(GameStateChangeEvent event) {
+        if (event.getOldState().equals(GameState.starting) && event.getNewState().equals(GameState.playing)) {
+            if (gameManager.getAssignedPlayers().size() < gameManager.getPlayerCount()) {
+                Bukkit.broadcastMessage(ChatColor.RED + "未分配三国杀身份，进行普通起床!");
+                return;
+            } else {
+                gameManager.startGame();
+            }
         }
     }
 
