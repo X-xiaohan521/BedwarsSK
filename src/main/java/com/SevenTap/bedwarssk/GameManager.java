@@ -3,12 +3,13 @@ package com.SevenTap.bedwarssk;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.*;
 
 import java.util.*;
 
 public class GameManager {
-    private static GameManager instance;
 
     private int playerCount = 8; // 默认8人
     private boolean emperorShown = true; // 默认显示主公
@@ -66,16 +67,11 @@ public class GameManager {
     }
 
     public GameManager() {
-        instance = this;
         // 初始化计分板
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         if (manager != null) {
             scoreboard = manager.getNewScoreboard();
         }
-    }
-
-    public static GameManager getGameManager() {
-        return instance;
     }
 
     public void setPlayerCount(int count) {
@@ -222,6 +218,7 @@ public class GameManager {
 
     public void startGame() {
         gameStarted = true;
+        startCheckingGameEnd();
         Bukkit.broadcastMessage(ChatColor.GOLD + "=================================");
         Bukkit.broadcastMessage(ChatColor.GREEN + "身份起床战争正式开始!");
         Bukkit.broadcastMessage(ChatColor.YELLOW + "祝各位游戏愉快!");
@@ -266,6 +263,32 @@ public class GameManager {
     // 获取计分板（如果需要）
     public Scoreboard getScoreboard() {
         return scoreboard;
+    }
+
+    private BukkitTask startCheckingGameEnd() {
+        BukkitTask checkGameEnd = new BukkitRunnable() {
+            @Override
+            public void run() {
+                // 判断主公胜利
+                Boolean isEmperorWin = false;
+                for (Map.Entry<String, Role> entry : playerRoles.entrySet()) {
+                    if (!entry.getValue().equals(Role.REBEL) && !entry.getValue().equals(Role.TRAITOR)) {
+                        continue;
+                    } else {
+                        if (playerStatus.get(entry.getKey()).equals(PlayerStatus.ALIVE)) {
+                            isEmperorWin = false;
+                            break;
+                        } else {
+                            isEmperorWin = true;
+                        }
+                    }
+                }
+                if (isEmperorWin) {
+                    announceVictory(Role.EMPEROR);
+                }
+            };
+        }.runTaskTimer(BedwarsSKPlugin.getInstance(), 0L, 20L);
+        return checkGameEnd;
     }
 
     private void announceVictory(Role winningRole) {

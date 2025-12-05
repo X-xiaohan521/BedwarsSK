@@ -56,7 +56,6 @@ public class BedwarsSKPlugin extends JavaPlugin {
 
             String subCommand = args[0].toLowerCase();
 
-            // 将switch改为if-else
             if (subCommand.equals("playercounts")) {
                 if (args.length == 2) {
                     try {

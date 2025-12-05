@@ -17,12 +17,12 @@ public class GameListener implements Listener {
 
     public GameListener() {
         this.plugin = BedwarsSKPlugin.getInstance();
-        this.gameManager = GameManager.getGameManager();
+        this.gameManager = plugin.getGameManager();
     }
 
     @EventHandler
     public void onGameStart(GameStateChangeEvent event) {
-        if (event.getOldState().equals(GameState.starting) && event.getNewState().equals(GameState.playing)) {
+        if (event.getNewState().equals(GameState.playing)) {
             if (gameManager.getAssignedPlayers().size() < gameManager.getPlayerCount()) {
                 Bukkit.broadcastMessage(ChatColor.RED + "未分配三国杀身份，进行普通起床!");
                 return;
