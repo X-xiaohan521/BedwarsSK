@@ -247,10 +247,10 @@ public class GameManager {
 
     // 床被破坏时的处理 - 暂时留空，等BedWars事件正常后再实现
     public void onBedDestroyed(List<Player> victimPlayers) {
-        if (!gameStarted || !playerRoles.containsKey(player.getName())) return;
-
-        playerStatus.put(player.getName(), PlayerStatus.BED_BROKEN);
-
+        for (Player player : victimPlayers) {
+            if (!gameStarted || !playerRoles.containsKey(player.getName())) return;
+            playerStatus.put(player.getName(), PlayerStatus.BED_BROKEN);
+        }
     }
 
     // 玩家死亡时的处理 - 暂时留空，等BedWars事件正常后再实现
