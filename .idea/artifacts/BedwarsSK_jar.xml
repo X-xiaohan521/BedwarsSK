@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BedwarsSK.jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BedwarsSK_jar</output-path>
+    <root id="archive" name="BedwarsSK.jar">
+      <element id="module-output" name="BedwarsSK" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/spigot-api-1.8.8-R0.1-SNAPSHOT.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/bedwars-plugin-22.3.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

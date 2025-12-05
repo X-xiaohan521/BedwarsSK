@@ -1,0 +1,18 @@
+name: BedwarsSK
+version: 1.0.0
+main: com.SevenTap.bedwarssk.BedwarsSKPlugin
+api-version: 1.8
+description: 三国杀风格起床战争插件
+author: SevenTap
+
+commands:
+  bwsk:
+    description: BedwarsSK主命令
+    usage: /<command> [playercounts|emperorshown|assign|role|roleall|start|status|reset]
+    permission: bwsk.use
+    aliases: [bedwarssk]
+
+permissions:
+  bwsk.use:
+    description: 允许使用BedwarsSK命令
+    default: op
