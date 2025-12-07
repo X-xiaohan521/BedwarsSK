@@ -20,6 +20,7 @@ public class GameListener implements Listener {
         this.gameManager = plugin.getGameManager();
     }
 
+    // BedWars开始事件
     @EventHandler
     public void onGameStart(GameStateChangeEvent event) {
         if (event.getNewState().equals(GameState.playing)) {
@@ -27,7 +28,7 @@ public class GameListener implements Listener {
                 Bukkit.broadcastMessage(ChatColor.RED + "未分配三国杀身份，进行普通起床!");
                 return;
             } else {
-                gameManager.startGame();
+                gameManager.startGame(event.getArena());
             }
         }
     }

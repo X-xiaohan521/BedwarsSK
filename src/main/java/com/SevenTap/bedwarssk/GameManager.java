@@ -3,9 +3,14 @@ package com.SevenTap.bedwarssk;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
+
 import org.bukkit.scoreboard.*;
+
+// import org.bukkit.scheduler.BukkitRunnable;
+// import org.bukkit.scheduler.BukkitTask;
+
+import com.andrei1058.bedwars.api.arena.GameState;
+import com.andrei1058.bedwars.api.arena.IArena;
 
 import java.util.*;
 
@@ -14,6 +19,7 @@ public class GameManager {
     private int playerCount = 8; // 默认8人
     private boolean emperorShown = true; // 默认显示主公
     private boolean gameStarted = false;
+    private IArena arena;
 
     private final Map<String, Role> playerRoles = new HashMap<>();
     private final Map<String, PlayerStatus> playerStatus = new HashMap<>();
@@ -216,9 +222,10 @@ public class GameManager {
         return playerRoles.keySet();
     }
 
-    public void startGame() {
+    public void startGame(IArena arena) {
         gameStarted = true;
-        startCheckingGameEnd();
+        this.arena = arena;
+        // startCheckingGameEnd();
         Bukkit.broadcastMessage(ChatColor.GOLD + "=================================");
         Bukkit.broadcastMessage(ChatColor.GREEN + "身份起床战争正式开始!");
         Bukkit.broadcastMessage(ChatColor.YELLOW + "祝各位游戏愉快!");
@@ -257,6 +264,8 @@ public class GameManager {
             Role role = playerRoles.get(player.getName());
             Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " (" +
                     role.getDisplayName() + ChatColor.RED + ") 已被淘汰!");
+
+            checkGameEnd();
         }
     }
 
@@ -265,31 +274,55 @@ public class GameManager {
         return scoreboard;
     }
 
-    private BukkitTask startCheckingGameEnd() {
-        BukkitTask checkGameEnd = new BukkitRunnable() {
-            @Override
-            public void run() {
-                // 判断主公胜利
-                Boolean isEmperorWin = false;
-                for (Map.Entry<String, Role> entry : playerRoles.entrySet()) {
-                    if (!entry.getValue().equals(Role.REBEL) && !entry.getValue().equals(Role.TRAITOR)) {
-                        continue;
-                    } else {
-                        if (playerStatus.get(entry.getKey()).equals(PlayerStatus.ALIVE)) {
-                            isEmperorWin = false;
-                            break;
-                        } else {
-                            isEmperorWin = true;
-                        }
-                    }
+    // 游戏结束检测
+    private void checkGameEnd() {
+        Boolean isEmperorWin = false;
+        for (Map.Entry<String, Role> entry : playerRoles.entrySet()) {
+            if (!entry.getValue().equals(Role.REBEL) && !entry.getValue().equals(Role.TRAITOR)) {
+                continue;
+            } else {
+                if (playerStatus.get(entry.getKey()).equals(PlayerStatus.FINAL_DEAD)) {
+                    isEmperorWin = true;
+                } else {
+                    isEmperorWin = false;
+                    break;
                 }
-                if (isEmperorWin) {
-                    announceVictory(Role.EMPEROR);
-                }
-            };
-        }.runTaskTimer(BedwarsSKPlugin.getInstance(), 0L, 20L);
-        return checkGameEnd;
+            }
+        }
+        if (isEmperorWin) {
+            arena.changeStatus(GameState.restarting);
+            announceVictory(Role.EMPEROR);
+            resetGame();
+        }
     }
+
+    // private BukkitTask startCheckingGameEnd() {
+    //     BukkitTask checkGameEnd = new BukkitRunnable() {
+    //         @Override
+    //         public void run() {
+    //             // 判断主公胜利
+    //             Boolean isEmperorWin = false;
+    //             for (Map.Entry<String, Role> entry : playerRoles.entrySet()) {
+    //                 if (!entry.getValue().equals(Role.REBEL) && !entry.getValue().equals(Role.TRAITOR)) {
+    //                     continue;
+    //                 } else {
+    //                     if (playerStatus.get(entry.getKey()).equals(PlayerStatus.ALIVE)) {
+    //                         isEmperorWin = false;
+    //                         break;
+    //                     } else {
+    //                         isEmperorWin = true;
+    //                     }
+    //                 }
+    //             }
+    //             if (isEmperorWin) {
+    //                 cancel();
+    //                 arena.changeStatus(GameState.restarting);
+    //                 announceVictory(Role.EMPEROR);
+    //             }
+    //         };
+    //     }.runTaskTimer(BedwarsSKPlugin.getInstance(), 0L, 20L);
+    //     return checkGameEnd;
+    // }
 
     private void announceVictory(Role winningRole) {
         gameStarted = false;
@@ -302,8 +335,10 @@ public class GameManager {
                 Bukkit.broadcastMessage(ChatColor.RED + "主公阵营胜利!");
                 // 显示所有忠臣
                 for (Map.Entry<String, Role> entry : playerRoles.entrySet()) {
-                    if (entry.getValue() == Role.LOYALIST) {
-                        Bukkit.broadcastMessage(ChatColor.BLUE + "忠臣: " + entry.getKey());
+                    if (entry.getValue() == Role.EMPEROR) {
+                        Bukkit.broadcastMessage(Role.EMPEROR.getColor() + "主公: " + entry.getKey());
+                    } else if (entry.getValue() == Role.LOYALIST) {
+                        Bukkit.broadcastMessage(Role.LOYALIST.getColor() + "忠臣: " + entry.getKey());
                     }
                 }
                 break;

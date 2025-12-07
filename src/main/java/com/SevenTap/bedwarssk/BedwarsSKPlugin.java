@@ -7,6 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.andrei1058.bedwars.BedWars;
+import com.andrei1058.bedwars.api.arena.IArena;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,7 +144,18 @@ public class BedwarsSKPlugin extends JavaPlugin {
                     sender.sendMessage(ChatColor.RED + "请先分配身份!");
                     return true;
                 }
-                gameManager.startGame();
+                if (sender instanceof Player) {
+                    if (!BedWars.getAPI().getArenaUtil().isPlaying((Player)sender)) {
+                        sender.sendMessage(ChatColor.RED + "请先进入起床战争!");
+                        return true;
+                    } else {
+                        IArena arena = BedWars.getAPI().getArenaUtil().getArenaByPlayer((Player)sender);
+                        gameManager.startGame(arena);
+                    }
+                } else {
+                    sender.sendMessage(ChatColor.RED + "不允许控制台启动游戏!");
+                }                
+                
                 sender.sendMessage(ChatColor.GREEN + "游戏开始!");
             } else if (subCommand.equals("status")) {
                 sender.sendMessage(ChatColor.GOLD + "=== 游戏状态 ===");
