@@ -15,62 +15,21 @@ import com.andrei1058.bedwars.api.arena.IArena;
 import java.util.*;
 
 public class GameManager {
-
+    // 游戏相关超参数
     private int playerCount = 8; // 默认8人
-    private boolean emperorShown = true; // 默认显示主公
+    private boolean isEmperorShown = true; // 默认显示主公
     private boolean gameStarted = false;
-    private IArena arena;
+    private IArena arena;   // 起床地图
 
+    // 玩家角色和状态
     private final Map<String, Role> playerRoles = new HashMap<>();
     private final Map<String, PlayerStatus> playerStatus = new HashMap<>();
     
-    private String emperorPlayer;
+    // 主公名字
+    private String emperorPlayerName;
+
+    // 计分板（预留）
     private Scoreboard scoreboard;
-
-    public enum Role {
-        EMPEROR("主公", ChatColor.RED, "消灭所有反贼和内奸"),
-        LOYALIST("忠臣", ChatColor.BLUE, "保护主公，消灭反贼和内奸"),
-        TRAITOR("内奸", ChatColor.DARK_PURPLE, "消灭除自己外的所有玩家"),
-        REBEL("反贼", ChatColor.GREEN, "消灭主公");
-
-        private final String displayName;
-        private final ChatColor color;
-        private final String winCondition;
-
-        Role(String displayName, ChatColor color, String winCondition) {
-            this.displayName = displayName;
-            this.color = color;
-            this.winCondition = winCondition;
-        }
-
-        public String getDisplayName() {
-            return color + displayName;
-        }
-
-        public ChatColor getColor() {
-            return color;
-        }
-
-        public String getWinCondition() {
-            return winCondition;
-        }
-    }
-
-    public enum PlayerStatus {
-        ALIVE("存活"),
-        BED_BROKEN("床被破坏"),
-        FINAL_DEAD("最终死亡");
-
-        private final String display;
-
-        PlayerStatus(String display) {
-            this.display = display;
-        }
-
-        public String getDisplay() {
-            return display;
-        }
-    }
 
     public GameManager() {
         // 初始化计分板
@@ -88,12 +47,12 @@ public class GameManager {
         return playerCount;
     }
 
-    public void setEmperorShown(boolean shown) {
-        this.emperorShown = shown;
+    public void setEmperorShown(boolean isShown) {
+        this.isEmperorShown = isShown;
     }
 
     public boolean isEmperorShown() {
-        return emperorShown;
+        return isEmperorShown;
     }
 
     public boolean isGameStarted() {
@@ -109,10 +68,10 @@ public class GameManager {
         // 重置之前的分配
         playerRoles.clear();
         playerStatus.clear();
-        emperorPlayer = null;
+        emperorPlayerName = null;
 
-        // 准备身份列表 - 修复Diamond操作符
-        List<Role> roles = generateRoles();
+        // 准备身份列表
+        List<Role> roles = Role.generateRoles(playerCount);
         Collections.shuffle(roles);
         Collections.shuffle(players);
 
@@ -131,61 +90,17 @@ public class GameManager {
 
             // 如果是主公，记录下来
             if (role == Role.EMPEROR) {
-                emperorPlayer = player.getName();
+                emperorPlayerName = player.getName();
             }
         }
 
         Bukkit.broadcastMessage(ChatColor.GREEN + "身份分配完成！");
     }
 
-    private List<Role> generateRoles() {
-        List<Role> roles = new ArrayList<>();
-
-        switch (playerCount) {
-            case 5:
-                roles.add(Role.EMPEROR);
-                roles.add(Role.LOYALIST);
-                roles.add(Role.TRAITOR);
-                roles.add(Role.REBEL);
-                roles.add(Role.REBEL);
-                break;
-            case 6:
-                roles.add(Role.EMPEROR);
-                roles.add(Role.LOYALIST);
-                roles.add(Role.TRAITOR);
-                roles.add(Role.REBEL);
-                roles.add(Role.REBEL);
-                roles.add(Role.REBEL);
-                break;
-            case 7:
-                roles.add(Role.EMPEROR);
-                roles.add(Role.LOYALIST);
-                roles.add(Role.LOYALIST);
-                roles.add(Role.TRAITOR);
-                roles.add(Role.REBEL);
-                roles.add(Role.REBEL);
-                roles.add(Role.REBEL);
-                break;
-            case 8:
-            default:
-                roles.add(Role.EMPEROR);
-                roles.add(Role.LOYALIST);
-                roles.add(Role.LOYALIST);
-                roles.add(Role.TRAITOR);
-                roles.add(Role.REBEL);
-                roles.add(Role.REBEL);
-                roles.add(Role.REBEL);
-                roles.add(Role.REBEL);
-                break;
-        }
-
-        return roles;
-    }
-
     public void showEmperor() {
-        if (emperorPlayer == null) return;
+        if (emperorPlayerName == null) return;
 
-        Player emperor = Bukkit.getPlayer(emperorPlayer);
+        Player emperor = Bukkit.getPlayer(emperorPlayerName);
         if (emperor == null) return;
 
         // 设置名称前缀
@@ -200,8 +115,8 @@ public class GameManager {
     }
 
     public void hideEmperor() {
-        if (emperorPlayer != null) {
-            Player emperor = Bukkit.getPlayer(emperorPlayer);
+        if (emperorPlayerName != null) {
+            Player emperor = Bukkit.getPlayer(emperorPlayerName);
             if (emperor != null) {
                 emperor.setDisplayName(emperor.getName());
                 emperor.setPlayerListName(emperor.getName());
@@ -236,7 +151,17 @@ public class GameManager {
         playerRoles.clear();
         playerStatus.clear();
         gameStarted = false;
-        emperorPlayer = null;
+        arena = null;
+
+        // 重置主公显示名字
+        if (emperorPlayerName != null) {
+            Player emperor = Bukkit.getPlayer(emperorPlayerName);
+            if (emperor != null) {
+                emperor.setDisplayName(emperorPlayerName);
+                emperor.setPlayerListName(emperorPlayerName);
+            }
+        }
+        emperorPlayerName = null;
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.setDisplayName(player.getName());

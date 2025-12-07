@@ -77,10 +77,10 @@ public class BedwarsSKPlugin extends JavaPlugin {
                 }
             } else if (subCommand.equals("emperorshown")) {
                 if (args.length == 2) {
-                    boolean show = Boolean.parseBoolean(args[1]);
-                    gameManager.setEmperorShown(show);
-                    sender.sendMessage(ChatColor.GREEN + "主公身份显示已设置为: " + show);
-                    if (show) {
+                    boolean isShown = Boolean.parseBoolean(args[1]);
+                    gameManager.setEmperorShown(isShown);
+                    sender.sendMessage(ChatColor.GREEN + "主公身份显示已设置为: " + isShown);
+                    if (isShown) {
                         sender.sendMessage(ChatColor.YELLOW + "主公身份将对所有人可见");
                     } else {
                         sender.sendMessage(ChatColor.YELLOW + "主公身份将对其他人隐藏");
@@ -96,7 +96,6 @@ public class BedwarsSKPlugin extends JavaPlugin {
                         return true;
                     }
 
-                    // 获取当前在线玩家 - 修复Diamond操作符
                     List<Player> onlinePlayers = new ArrayList<Player>(Bukkit.getOnlinePlayers());
                     if (onlinePlayers.size() < gameManager.getPlayerCount()) {
                         player.sendMessage(ChatColor.RED + "在线玩家不足! 需要 " + gameManager.getPlayerCount() + " 人，当前只有 " + onlinePlayers.size() + " 人");
@@ -115,7 +114,7 @@ public class BedwarsSKPlugin extends JavaPlugin {
             } else if (subCommand.equals("role")) {
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
-                    GameManager.Role role = gameManager.getPlayerRole(player);
+                    Role role = gameManager.getPlayerRole(player);
                     if (role != null) {
                         player.sendMessage(ChatColor.GOLD + "=== 你的身份 ===");
                         player.sendMessage(ChatColor.YELLOW + "身份: " + role.getDisplayName());
@@ -131,7 +130,7 @@ public class BedwarsSKPlugin extends JavaPlugin {
                     for (String playerName : gameManager.getAllRoles().keySet()) {
                         Player target = Bukkit.getPlayer(playerName);
                         if (target != null) {
-                            GameManager.Role role = gameManager.getPlayerRole(target);
+                            Role role = gameManager.getPlayerRole(target);
                             if (role != null) {
                                 player.sendMessage(ChatColor.YELLOW + target.getName() + ": " +
                                         role.getDisplayName());
