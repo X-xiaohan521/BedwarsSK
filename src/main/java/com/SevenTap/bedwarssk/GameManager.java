@@ -11,8 +11,10 @@ import org.bukkit.scoreboard.*;
 
 import com.andrei1058.bedwars.api.arena.GameState;
 import com.andrei1058.bedwars.api.arena.IArena;
+import com.andrei1058.bedwars.api.arena.team.TeamColor;
 
 import java.util.*;
+
 
 public class GameManager {
     // 游戏相关超参数
@@ -26,6 +28,7 @@ public class GameManager {
     private final Map<String, PlayerStatus> playerStatus = new HashMap<>();
     
     // 主公名字
+    private String emperorPlayerOriginalName;
     private String emperorPlayerName;
 
     // 计分板（预留）
@@ -68,6 +71,7 @@ public class GameManager {
         // 重置之前的分配
         playerRoles.clear();
         playerStatus.clear();
+        emperorPlayerOriginalName = null;
         emperorPlayerName = null;
 
         // 准备身份列表
@@ -90,7 +94,7 @@ public class GameManager {
 
             // 如果是主公，记录下来
             if (role == Role.EMPEROR) {
-                emperorPlayerName = player.getName();
+                emperorPlayerOriginalName = player.getName();
             }
         }
 
@@ -98,30 +102,33 @@ public class GameManager {
     }
 
     public void showEmperor() {
-        if (emperorPlayerName == null) return;
+        if (emperorPlayerOriginalName == null || isEmperorShown == false) return;
 
-        Player emperor = Bukkit.getPlayer(emperorPlayerName);
+        Player emperor = Bukkit.getPlayer(emperorPlayerOriginalName);
         if (emperor == null) return;
 
-        // 设置名称前缀
-        emperor.setDisplayName(ChatColor.RED + "[主公] " + ChatColor.WHITE + emperor.getName());
-        emperor.setPlayerListName(ChatColor.RED + "[主公] " + ChatColor.WHITE + emperor.getName());
+        // 设置主公名称前缀
+        ChatColor emperorTeamColor = TeamColor.getChatColor(arena.getTeam(emperor).getColor().toString());
+        emperorPlayerName = ChatColor.RED + "[主公] " + emperorTeamColor + emperorPlayerOriginalName;
+        emperor.setDisplayName(emperorPlayerName);
+        emperor.setPlayerListName(emperorPlayerName);
 
         // 广播主公身份
         Bukkit.broadcastMessage(ChatColor.GOLD + "=================================");
-        Bukkit.broadcastMessage(ChatColor.RED + "主公是: " + emperor.getName());
+        Bukkit.broadcastMessage(ChatColor.RED + "主公是: " + emperorTeamColor + emperorPlayerOriginalName);
         Bukkit.broadcastMessage(ChatColor.YELLOW + "主公已亮明身份!");
         Bukkit.broadcastMessage(ChatColor.GOLD + "=================================");
     }
 
-    public void hideEmperor() {
-        if (emperorPlayerName != null) {
-            Player emperor = Bukkit.getPlayer(emperorPlayerName);
-            if (emperor != null) {
-                emperor.setDisplayName(emperor.getName());
-                emperor.setPlayerListName(emperor.getName());
-            }
-        }
+    public void hideEmperor() throws NullPointerException {
+        // 移除 null check，故意抛出 NPE，方便调试
+        Player emperor = Bukkit.getPlayer(emperorPlayerOriginalName);
+        emperor.setDisplayName(emperorPlayerOriginalName);
+        emperor.setPlayerListName(emperorPlayerOriginalName);
+        // if (emperorPlayerOriginalName != null) {
+        //     if (emperor != null) {
+        //     }
+        // }
     }
 
     public Role getPlayerRole(Player player) {
@@ -138,13 +145,20 @@ public class GameManager {
     }
 
     public void startGame(IArena arena) {
+        // 设置游戏开始
         gameStarted = true;
         this.arena = arena;
-        // startCheckingGameEnd();
+
+        // 广播游戏开始消息
         Bukkit.broadcastMessage(ChatColor.GOLD + "=================================");
         Bukkit.broadcastMessage(ChatColor.GREEN + "身份起床战争正式开始!");
         Bukkit.broadcastMessage(ChatColor.YELLOW + "祝各位游戏愉快!");
         Bukkit.broadcastMessage(ChatColor.GOLD + "=================================");
+        
+        // 显示主公身份
+        if (isEmperorShown()) {
+            showEmperor();
+        }
     }
 
     public void resetGame() {
@@ -154,18 +168,11 @@ public class GameManager {
         arena = null;
 
         // 重置主公显示名字
-        if (emperorPlayerName != null) {
-            Player emperor = Bukkit.getPlayer(emperorPlayerName);
-            if (emperor != null) {
-                emperor.setDisplayName(emperorPlayerName);
-                emperor.setPlayerListName(emperorPlayerName);
-            }
-        }
-        emperorPlayerName = null;
-
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            player.setDisplayName(player.getName());
-            player.setPlayerListName(player.getName());
+        try {
+            hideEmperor();
+        } catch (NullPointerException e) {
+            // 如果报 NPE，打印堆栈调用
+            e.printStackTrace();
         }
 
         Bukkit.broadcastMessage(ChatColor.GREEN + "游戏已重置!");

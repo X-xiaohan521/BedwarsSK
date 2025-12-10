@@ -106,10 +106,6 @@ public class BedwarsSKPlugin extends JavaPlugin {
                     gameManager.assignRoles(onlinePlayers.subList(0, gameManager.getPlayerCount()));
                     player.sendMessage(ChatColor.GREEN + "身份分配完成!");
 
-                    // 显示主公身份
-                    if (gameManager.isEmperorShown()) {
-                        gameManager.showEmperor();
-                    }
                 }
             } else if (subCommand.equals("role")) {
                 if (sender instanceof Player) {
