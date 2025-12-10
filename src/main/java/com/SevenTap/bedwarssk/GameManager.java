@@ -300,6 +300,10 @@ public class GameManager {
         
         Bukkit.broadcastMessage(ChatColor.GOLD + "=================================");
         
+        broadcastAllPlayerRoles();
+    }
+
+    public void broadcastAllPlayerRoles() {
         // 显示所有玩家身份
         Bukkit.broadcastMessage(ChatColor.YELLOW + "=== 所有玩家身份 ===");
         for (Map.Entry<String, Role> entry : playerRoles.entrySet()) {

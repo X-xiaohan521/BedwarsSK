@@ -15,4 +15,4 @@ commands:
 permissions:
   bwsk.use:
     description: 允许使用BedwarsSK命令
-    default: op
+    default: true
