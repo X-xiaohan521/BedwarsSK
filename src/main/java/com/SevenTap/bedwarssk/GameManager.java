@@ -50,6 +50,10 @@ public class GameManager {
         return playerCount;
     }
 
+    public PlayerStatus getPlayerStatus(Player player) {
+        return playerStatus.getOrDefault(player.getName(), PlayerStatus.ALIVE);
+    }
+
     public void setEmperorShown(boolean isShown) {
         this.isEmperorShown = isShown;
     }

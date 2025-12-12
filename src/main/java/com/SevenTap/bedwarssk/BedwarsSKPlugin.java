@@ -2,7 +2,6 @@ package com.SevenTap.bedwarssk;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -62,12 +61,17 @@ public class BedwarsSKPlugin extends JavaPlugin {
             } else if (sender instanceof Player) {
                 Player player = (Player) sender;
 
+                if (args.length == 0) {
+                    sendHelp(sender);
+                    return true;
+                }
+
                 String subCommand = args[0].toLowerCase();
                 
                 if (!sender.isOp()) {
                     if (subCommand.equals("roleall")) {
                         // 允许非 OP 玩家（在淘汰为旁观者后）使用 `/bwsk roleall` 命令查看所有玩家身份
-                        if (player.getGameMode().equals(GameMode.SPECTATOR)) {
+                        if (gameManager.getPlayerStatus(player).equals(PlayerStatus.FINAL_DEAD)) {
                             sendAllPlayerRoles(player);
                             return true;
                         } else {
@@ -84,10 +88,6 @@ public class BedwarsSKPlugin extends JavaPlugin {
                     }
                 }
 
-                if (args.length == 0) {
-                    sendHelp(sender);
-                    return true;
-                }
     
                 if (subCommand.equals("playercounts")) {
                     if (args.length == 2) {
@@ -195,14 +195,20 @@ public class BedwarsSKPlugin extends JavaPlugin {
     }
 
     private void sendHelp(CommandSender sender) {
-        sender.sendMessage(ChatColor.GOLD + "=== BedwarsSK 命令帮助 ===");
-        sender.sendMessage(ChatColor.YELLOW + "/bwsk playercounts <5-8> - 设置玩家数量");
-        sender.sendMessage(ChatColor.YELLOW + "/bwsk emperorshown <true/false> - 设置主公身份显示");
-        sender.sendMessage(ChatColor.YELLOW + "/bwsk assign - 分配身份");
-        sender.sendMessage(ChatColor.YELLOW + "/bwsk role - 查看自己身份");
-        sender.sendMessage(ChatColor.YELLOW + "/bwsk roleall - 查看所有人身份");
-        sender.sendMessage(ChatColor.YELLOW + "/bwsk start - 开始游戏");
-        sender.sendMessage(ChatColor.YELLOW + "/bwsk status - 查看游戏状态");
-        sender.sendMessage(ChatColor.YELLOW + "/bwsk reset - 重置游戏");
+        if (sender.isOp()) {
+            sender.sendMessage(ChatColor.GOLD + "=== BedwarsSK 命令帮助 ===");
+            sender.sendMessage(ChatColor.YELLOW + "/bwsk playercounts <5-8> - 设置玩家数量");
+            sender.sendMessage(ChatColor.YELLOW + "/bwsk emperorshown <true/false> - 设置主公身份显示");
+            sender.sendMessage(ChatColor.YELLOW + "/bwsk assign - 分配身份");
+            sender.sendMessage(ChatColor.YELLOW + "/bwsk role - 查看自己身份");
+            sender.sendMessage(ChatColor.YELLOW + "/bwsk roleall - 查看所有人身份");
+            sender.sendMessage(ChatColor.YELLOW + "/bwsk start - 开始游戏");
+            sender.sendMessage(ChatColor.YELLOW + "/bwsk status - 查看游戏状态");
+            sender.sendMessage(ChatColor.YELLOW + "/bwsk reset - 重置游戏");
+        } else {
+            sender.sendMessage(ChatColor.GOLD + "=== BedwarsSK 命令帮助 ===");
+            sender.sendMessage(ChatColor.YELLOW + "/bwsk role - 查看自己身份");
+            sender.sendMessage(ChatColor.YELLOW + "/bwsk roleall - 查看所有人身份（仅允许在旁观游戏时使用）");
+        }
     }
 }
