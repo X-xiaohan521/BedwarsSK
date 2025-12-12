@@ -129,10 +129,6 @@ public class GameManager {
         Player emperor = Bukkit.getPlayer(emperorPlayerOriginalName);
         emperor.setDisplayName(emperorPlayerOriginalName);
         emperor.setPlayerListName(emperorPlayerOriginalName);
-        // if (emperorPlayerOriginalName != null) {
-        //     if (emperor != null) {
-        //     }
-        // }
     }
 
     public Role getPlayerRole(Player player) {
@@ -166,6 +162,8 @@ public class GameManager {
     }
 
     public void resetGame() {
+        arena.changeStatus(GameState.restarting);
+
         playerRoles.clear();
         playerStatus.clear();
         gameStarted = false;
@@ -248,15 +246,12 @@ public class GameManager {
         
         // 执行游戏结束事件
         if (isEmperorWin) {
-            arena.changeStatus(GameState.restarting);
             announceVictory(Role.EMPEROR);
             resetGame();
         } else if (isTraitorWin) {
-            arena.changeStatus(GameState.restarting);
             announceVictory(Role.TRAITOR);
             resetGame();
         } else if (isRebelWin) {
-            arena.changeStatus(GameState.restarting);
             announceVictory(Role.REBEL);
             resetGame();
         }

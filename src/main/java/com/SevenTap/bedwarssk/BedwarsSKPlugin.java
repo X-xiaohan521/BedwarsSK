@@ -155,7 +155,11 @@ public class BedwarsSKPlugin extends JavaPlugin {
                 } else if (subCommand.equals("status")) {
                     sendGameStatus(sender);
                 } else if (subCommand.equals("reset")) {
-                    gameManager.resetGame();
+                    if (gameManager.isGameStarted()) {
+                        gameManager.resetGame();
+                    } else {
+                        sender.sendMessage(ChatColor.RED + "游戏未开始!");
+                    }
                 } else {
                     sendHelp(sender);
                 }
