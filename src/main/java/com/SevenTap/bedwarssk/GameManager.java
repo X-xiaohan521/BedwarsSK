@@ -197,9 +197,9 @@ public class GameManager {
             playerStatus.put(player.getName(), PlayerStatus.FINAL_DEAD);
 
             // 玩家最终死亡信息（仅供测试，生产代码删除）
-            Role role = playerRoles.get(player.getName());
-            Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " (" +
-                    role.getDisplayName() + ChatColor.RED + ") 已被淘汰!");
+            // Role role = playerRoles.get(player.getName());
+            // Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " (" +
+            //         role.getDisplayName() + ChatColor.RED + ") 已被淘汰!");
 
             checkGameEnd(player);
         }
