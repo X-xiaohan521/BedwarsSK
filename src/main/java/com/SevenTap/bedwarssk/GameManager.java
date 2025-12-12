@@ -90,12 +90,6 @@ public class GameManager {
             playerRoles.put(player.getName(), role);
             playerStatus.put(player.getName(), PlayerStatus.ALIVE);
 
-            // 发送私人消息
-            player.sendMessage(ChatColor.GOLD + "=== 身份分配结果 ===");
-            player.sendMessage(ChatColor.YELLOW + "你的身份是: " + role.getDisplayName());
-            player.sendMessage(ChatColor.YELLOW + "胜利条件: " + role.getWinCondition());
-            player.sendMessage(ChatColor.GRAY + "输入 /bwsk role 可再次查看身份");
-
             // 如果是主公，记录下来
             if (role == Role.EMPEROR) {
                 emperorPlayerOriginalName = player.getName();
@@ -103,6 +97,18 @@ public class GameManager {
         }
 
         Bukkit.broadcastMessage(ChatColor.GREEN + "身份分配完成！");
+    }
+
+    private void sendAssignedRoles() {
+        for (Map.Entry<String, Role> entry : playerRoles.entrySet()) {
+            Player player = Bukkit.getPlayer(entry.getKey());
+            if (player != null) {
+                player.sendMessage(ChatColor.GOLD + "=== 身份分配结果 ===");
+                player.sendMessage(ChatColor.YELLOW + "你的身份是: " + entry.getValue().getDisplayName());
+                player.sendMessage(ChatColor.YELLOW + "胜利条件: " + entry.getValue().getWinCondition());
+                player.sendMessage(ChatColor.GRAY + "输入 /bwsk role 可再次查看身份");
+            }
+        }
     }
 
     public void showEmperor() {
@@ -159,6 +165,9 @@ public class GameManager {
         if (isEmperorShown()) {
             showEmperor();
         }
+
+        // 发送身份
+        sendAssignedRoles();
     }
 
     public void resetGame() {
@@ -198,6 +207,7 @@ public class GameManager {
             // Role role = playerRoles.get(player.getName());
             // Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " (" +
             //         role.getDisplayName() + ChatColor.RED + ") 已被淘汰!");
+            player.sendMessage(ChatColor.YELLOW + "你已被淘汰！可以输入 " + ChatColor.AQUA + "/bwsk roleall" + ChatColor.YELLOW + " 查看所有玩家身份。");
 
             checkGameEnd(player);
         }
