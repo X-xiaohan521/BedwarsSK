@@ -156,7 +156,7 @@ public class GameManager {
     }
 
     public Map<String, Role> getAllRoles() {
-        return new HashMap<String, Role>(playerRoles);
+        return new HashMap<>(playerRoles);
     }
 
     public Set<String> getAssignedPlayers() {
@@ -191,13 +191,7 @@ public class GameManager {
         gameStarted = false;
         arena = null;
 
-        // 重置主公显示名字
-        try {
-            hideEmperor();
-        } catch (NullPointerException e) {
-            // 如果报 NPE，打印堆栈调用
-            e.printStackTrace();
-        }
+        hideEmperor();
 
         Bukkit.broadcastMessage(ChatColor.GREEN + "游戏已重置!");
     }
@@ -232,6 +226,7 @@ public class GameManager {
     }
 
     // 获取计分板（如果需要）
+    @SuppressWarnings("unused")
     public Scoreboard getScoreboard() {
         return scoreboard;
     }
@@ -244,9 +239,7 @@ public class GameManager {
 
         // 如果所有反贼和内奸均最终死亡，则判定主公阵营胜利
         for (Map.Entry<String, Role> entry : playerRoles.entrySet()) {
-            if (!entry.getValue().equals(Role.REBEL) && !entry.getValue().equals(Role.TRAITOR)) {
-                continue;
-            } else {
+            if (entry.getValue().equals(Role.REBEL) || entry.getValue().equals(Role.TRAITOR)) {
                 if (playerStatus.get(entry.getKey()).equals(PlayerStatus.FINAL_DEAD)) {
                     isEmperorWin = true;
                 } else {
