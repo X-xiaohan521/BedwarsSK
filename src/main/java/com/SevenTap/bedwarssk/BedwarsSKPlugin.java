@@ -34,7 +34,7 @@ public class BedwarsSKPlugin extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new GameListener(), this);
 
         getLogger().info("BedwarsSK插件已启用!");
-        getLogger().info("作者: SevenTap");
+        getLogger().info("作者: SevenTap & UniMilk");
         getLogger().info("版本: 1.0.0");
     }
 

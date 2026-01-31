@@ -112,7 +112,7 @@ public class GameManager {
     }
 
     public void showEmperor() {
-        if (emperorPlayerOriginalName == null || isEmperorShown == false) return;
+        if (emperorPlayerOriginalName == null || !isEmperorShown) return;
 
         Player emperor = Bukkit.getPlayer(emperorPlayerOriginalName);
         if (emperor == null) return;
@@ -220,9 +220,9 @@ public class GameManager {
 
     // 游戏结束检测
     private void checkGameEnd(Player finalDeadPlayer) {
-        Boolean isEmperorWin = false;
-        Boolean isTraitorWin = false;
-        Boolean isRebelWin = false;
+        boolean isEmperorWin = false;
+        boolean isTraitorWin = false;
+        boolean isRebelWin = false;
 
         // 如果所有反贼和内奸均最终死亡，则判定主公阵营胜利
         for (Map.Entry<String, Role> entry : playerRoles.entrySet()) {
@@ -248,6 +248,7 @@ public class GameManager {
                         break;
                     } else {
                         isTraitorWin = true;
+                        //noinspection DataFlowIssue
                         isRebelWin = false;
                     }
                 }

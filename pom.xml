@@ -61,7 +61,7 @@
             <systemPath>${project.basedir}/libs/spigot-api-1.8.8-R0.1-SNAPSHOT.jar</systemPath>
         </dependency>
 
-        <!-- BedWars1058 依赖 - 根据包结构 -->
+        <!-- BedWars1058 依赖 -->
         <dependency>
             <groupId>com.andrei1058</groupId>
             <artifactId>bedwars-plugin</artifactId>

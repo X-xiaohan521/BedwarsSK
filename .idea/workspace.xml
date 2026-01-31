@@ -9,7 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc16fb38-881f-4518-9c12-47f1d709c857" name="更改" comment="" />
+    <list default="true" id="cc16fb38-881f-4518-9c12-47f1d709c857" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/BedwarsSKPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/BedwarsSKPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/GameManager.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,12 +27,40 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;X-xiaohan521&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/X-xiaohan521/BedwarsSK.git&quot;,
+    &quot;accountId&quot;: &quot;78010927-279f-4f97-abe1-301ac248d305&quot;
+  }
+}</component>
+  <component name="InvalidFacetManager">
+    <ignored-facets>
+      <facet id="bedwarssk/invalid/Minecraft" />
+    </ignored-facets>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="36L0tUnzzxrrz3e4W6bcNhKIz2u" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
@@ -36,6 +69,12 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "1.1-dev",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Lenovo/IdeaProjects/BedwarsSK",
     "node.js.detected.package.eslint": "true",
@@ -44,10 +83,11 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/Lenovo/IdeaProjects/BedwarsSK/src/main/java/org/example/Main.java",
-    "project.structure.last.edited": "模块",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "terminal",
+    "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true",
     "应用程序.Test (1).executor": "Run",
     "应用程序.Test.executor": "Run"
@@ -62,7 +102,7 @@
       <recent name="C:\Users\Lenovo\IdeaProjects\BedwarsSK\src\com\SevenTap" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.Test">
+  <component name="RunManager" selected="Application.Test">
     <configuration name="Test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.SevenTap.bedwarssk.Test" />
       <module name="BedwarsSK" />
@@ -89,18 +129,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="应用程序.Test" />
-        <item itemvalue="应用程序.Test (1)" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.28238.7" />
-        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-IU-252.28238.7" />
+        <option value="bundled-jdk-30f59d01ecdd-cffe25b9f5b3-intellij.indexing.shared.core-IU-253.28294.334" />
+        <option value="bundled-js-predefined-d6986cc7102b-c7e53b3be11b-JavaScript-IU-253.28294.334" />
       </set>
     </attachedChunks>
   </component>
@@ -116,6 +150,10 @@
       <workItem from="1764775989844" duration="1934000" />
       <workItem from="1764859189058" duration="4353000" />
       <workItem from="1764948380262" duration="5728000" />
+      <workItem from="1766150917672" duration="779000" />
+      <workItem from="1769172595063" duration="399000" />
+      <workItem from="1769349614723" duration="11000" />
+      <workItem from="1769867006814" duration="414000" />
     </task>
     <servers />
   </component>
