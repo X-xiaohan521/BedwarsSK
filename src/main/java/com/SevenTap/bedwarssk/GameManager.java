@@ -22,6 +22,7 @@ public class GameManager {
     private boolean isEmperorShown = true; // 默认显示主公
     private boolean gameStarted = false;
     private IArena arena;   // 起床地图
+    private PublicRolesAfterDeath publicRolesAfterDeath = PublicRolesAfterDeath.FORCE_NOT_PUBLIC;
 
     // 玩家角色和状态
     private final Map<String, Role> playerRoles = new HashMap<>();
@@ -64,6 +65,18 @@ public class GameManager {
 
     public boolean isGameStarted() {
         return gameStarted;
+    }
+
+    public void setPublicRolesAfterDeath(PublicRolesAfterDeath publicRolesAfterDeath) {
+        this.publicRolesAfterDeath = publicRolesAfterDeath;
+    }
+
+    public PublicRolesAfterDeath getPublicRolesAfterDeath() {
+        return publicRolesAfterDeath;
+    }
+
+    public IArena getArena() {
+        return arena;
     }
 
     public void assignRoles(List<Player> players) {
@@ -202,12 +215,17 @@ public class GameManager {
         PlayerStatus status = playerStatus.get(player.getName());
         if (status == PlayerStatus.BED_BROKEN) {
             playerStatus.put(player.getName(), PlayerStatus.FINAL_DEAD);
-
-            // 玩家最终死亡信息（仅供测试，生产代码删除）
-            // Role role = playerRoles.get(player.getName());
-            // Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " (" +
-            //         role.getDisplayName() + ChatColor.RED + ") 已被淘汰!");
             player.sendMessage(ChatColor.YELLOW + "你已被淘汰！可以输入 " + ChatColor.AQUA + "/bwsk roleall" + ChatColor.YELLOW + " 查看所有玩家身份。");
+
+            if (publicRolesAfterDeath.equals(PublicRolesAfterDeath.FORCE_PUBLIC)) {
+                player.sendMessage(ChatColor.YELLOW + "你也可以输入 " + ChatColor.AQUA + "/bwsk publicrole" + ChatColor.YELLOW + " 再次亮明自己的身份。");
+                // 强制公开玩家身份
+                Role role = playerRoles.get(player.getName());
+                Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " (" + role.getColor() +
+                        role.getDisplayName() + ChatColor.RED + ") 已被淘汰!");
+            } else if (publicRolesAfterDeath.equals(PublicRolesAfterDeath.OPTIONAL)) {
+                player.sendMessage(ChatColor.YELLOW + "你也可以输入 " + ChatColor.AQUA + "/bwsk publicrole" + ChatColor.YELLOW + " 主动亮明自己的身份。");
+            }
 
             checkGameEnd(player);
         }

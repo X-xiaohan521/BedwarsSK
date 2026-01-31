@@ -1,5 +1,6 @@
 package com.SevenTap.bedwarssk;
 
+import com.andrei1058.bedwars.api.arena.team.TeamColor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -69,105 +70,170 @@ public class BedwarsSKPlugin extends JavaPlugin {
                 String subCommand = args[0].toLowerCase();
                 
                 if (!sender.isOp()) {
-                    if (subCommand.equals("roleall")) {
-                        // 允许非 OP 玩家（在淘汰为旁观者后）使用 `/bwsk roleall` 命令查看所有玩家身份
-                        if (gameManager.getPlayerStatus(player).equals(PlayerStatus.FINAL_DEAD)) {
-                            sendAllPlayerRoles(player);
+                    switch (subCommand) {
+                        case "roleall":
+                            // 允许非 OP 玩家（在淘汰为旁观者后）使用 `/bwsk roleall` 命令查看所有玩家身份
+                            if (gameManager.getPlayerStatus(player).equals(PlayerStatus.FINAL_DEAD)) {
+                                sendAllPlayerRoles(player);
+                            } else {
+                                sender.sendMessage(ChatColor.RED + "你只能在被淘汰后使用该指令。");
+                            }
                             return true;
-                        } else {
-                            sender.sendMessage(ChatColor.RED + "你只能在被淘汰后使用该指令。");
+                        case "publicrole":
+                            // 允许非 OP 玩家（在淘汰为旁观者后）使用 `/bwsk publicrole` 命令宣布自己身份
+                            if (gameManager.getPlayerStatus(player).equals(PlayerStatus.FINAL_DEAD)) {
+                                if (gameManager.getPublicRolesAfterDeath().equals(PublicRolesAfterDeath.OPTIONAL) ||
+                                        gameManager.getPublicRolesAfterDeath().equals(PublicRolesAfterDeath.FORCE_PUBLIC)) {
+                                    announceRole(player);
+                                } else {
+                                    sender.sendMessage(ChatColor.RED + "本局游戏不允许自行公开身份。");
+                                }
+                            } else {
+                                sender.sendMessage(ChatColor.RED + "你只能在被淘汰后使用该指令。");
+                            }
                             return true;
-                        }
-                    } else if (subCommand.equals("role")) {
-                        // 允许非 OP 玩家查看自己身份
-                        sendRole(player);
-                        return true;
-                    } else {
-                        sender.sendMessage(ChatColor.RED + "你没有权限使用该指令。");
-                        return true;
+                        case "role":
+                            // 允许非 OP 玩家查看自己身份
+                            sendRole(player);
+                            return true;
+                        default:
+                            sender.sendMessage(ChatColor.RED + "你没有权限使用该指令。");
+                            return true;
                     }
                 }
 
-    
-                if (subCommand.equals("playercounts")) {
-                    if (args.length == 2) {
-                        try {
-                            int count = Integer.parseInt(args[1]);
-                            if (count < 5 || count > 8) {
-                                sender.sendMessage(ChatColor.RED + "玩家数量必须在5-8之间!");
-                                return true;
+
+                switch (subCommand) {
+                    case "playercounts":
+                        if (args.length == 2) {
+                            try {
+                                int count = Integer.parseInt(args[1]);
+                                if (count < 5 || count > 8) {
+                                    sender.sendMessage(ChatColor.RED + "玩家数量必须在5-8之间!");
+                                    return true;
+                                }
+                                gameManager.setPlayerCount(count);
+                                sender.sendMessage(ChatColor.GREEN + "已设置玩家数量为: " + count);
+                            } catch (NumberFormatException e) {
+                                sender.sendMessage(ChatColor.RED + "请输入有效的数字!");
                             }
-                            gameManager.setPlayerCount(count);
-                            sender.sendMessage(ChatColor.GREEN + "已设置玩家数量为: " + count);
-                        } catch (NumberFormatException e) {
-                            sender.sendMessage(ChatColor.RED + "请输入有效的数字!");
-                        }
-                    } else {
-                        sender.sendMessage(ChatColor.RED + "用法: /bwsk playercounts <5-8>");
-                    }
-                } else if (subCommand.equals("emperorshown")) {
-                    if (args.length == 2) {
-                        boolean isShown = Boolean.parseBoolean(args[1]);
-                        gameManager.setEmperorShown(isShown);
-                        sender.sendMessage(ChatColor.GREEN + "主公身份显示已设置为: " + isShown);
-                        if (isShown) {
-                            sender.sendMessage(ChatColor.YELLOW + "主公身份将对所有人可见");
                         } else {
-                            sender.sendMessage(ChatColor.YELLOW + "主公身份将对其他人隐藏");
+                            sender.sendMessage(ChatColor.RED + "用法: /bwsk playercounts <5-8>");
                         }
-                    } else {
-                        sender.sendMessage(ChatColor.RED + "用法: /bwsk emperorshown <true/false>");
-                    }
-                } else if (subCommand.equals("assign")) {
-                    if (gameManager.getPlayerCount() == 0) {
-                        sender.sendMessage(ChatColor.RED + "请先设置玩家数量!");
-                        return true;
-                    }
+                        break;
 
-                    List<Player> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
-                    if (onlinePlayers.size() < gameManager.getPlayerCount()) {
-                        sender.sendMessage(ChatColor.RED + "在线玩家不足! 需要 " + gameManager.getPlayerCount() + " 人，当前只有 " + onlinePlayers.size() + " 人");
-                        return true;
-                    }
+                    case "emperorshown":
+                        if (args.length == 2) {
+                            boolean isShown = Boolean.parseBoolean(args[1]);
+                            gameManager.setEmperorShown(isShown);
+                            sender.sendMessage(ChatColor.GREEN + "主公身份显示已设置为: " + isShown);
+                            if (isShown) {
+                                sender.sendMessage(ChatColor.YELLOW + "主公身份将对所有人可见");
+                            } else {
+                                sender.sendMessage(ChatColor.YELLOW + "主公身份将对其他人隐藏");
+                            }
+                        } else {
+                            sender.sendMessage(ChatColor.RED + "用法: /bwsk emperorshown <true/false>");
+                        }
+                        break;
 
-                    // 分配身份
-                    gameManager.assignRoles(onlinePlayers.subList(0, gameManager.getPlayerCount()));
-                    sender.sendMessage(ChatColor.GREEN + "身份分配完成!");
-                } else if (subCommand.equals("role")) {
-                    sendRole(player);
-                } else if (subCommand.equals("roleall")) {
-                    sendAllPlayerRoles(player);
-                } else if (subCommand.equals("start")) {
-                    if (gameManager.getAssignedPlayers().size() < gameManager.getPlayerCount()) {
-                        sender.sendMessage(ChatColor.RED + "请先分配身份!");
-                        return true;
-                    }
-                    
-                    if (!BedWars.getAPI().getArenaUtil().isPlaying((Player)sender)) {
-                        sender.sendMessage(ChatColor.RED + "请先进入起床战争!");
-                        return true;
-                    } else {
-                        IArena arena = BedWars.getAPI().getArenaUtil().getArenaByPlayer((Player)sender);
-                        gameManager.startGame(arena);
-                    }     
-                    
-                    sender.sendMessage(ChatColor.GREEN + "游戏开始!");
-                } else if (subCommand.equals("status")) {
-                    sendGameStatus(sender);
-                } else if (subCommand.equals("reset")) {
-                    if (gameManager.isGameStarted()) {
-                        gameManager.resetGame();
-                    } else {
-                        sender.sendMessage(ChatColor.RED + "游戏未开始!");
-                    }
-                } else {
-                    sendHelp(sender);
+                    case "assign":
+                        if (gameManager.getPlayerCount() == 0) {
+                            sender.sendMessage(ChatColor.RED + "请先设置玩家数量!");
+                            return true;
+                        }
+
+                        List<Player> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
+                        if (onlinePlayers.size() < gameManager.getPlayerCount()) {
+                            sender.sendMessage(ChatColor.RED + "在线玩家不足! 需要 " + gameManager.getPlayerCount() + " 人，当前只有 " + onlinePlayers.size() + " 人");
+                            return true;
+                        }
+
+                        // 分配身份
+                        gameManager.assignRoles(onlinePlayers.subList(0, gameManager.getPlayerCount()));
+                        sender.sendMessage(ChatColor.GREEN + "身份分配完成!");
+                        break;
+
+                    case "role":
+                        sendRole(player);
+                        break;
+
+                    case "roleall":
+                        sendAllPlayerRoles(player);
+                        break;
+
+                    case "setpublicrole":
+                        if (args.length == 2) {
+                            switch (args[1]) {
+                                case "true":
+                                    gameManager.setPublicRolesAfterDeath(PublicRolesAfterDeath.FORCE_PUBLIC);
+                                    sender.sendMessage(ChatColor.YELLOW + "玩家身份将在死亡后公开。");
+                                    break;
+                                case "false":
+                                    gameManager.setPublicRolesAfterDeath(PublicRolesAfterDeath.FORCE_NOT_PUBLIC);
+                                    sender.sendMessage(ChatColor.YELLOW + "玩家身份将在死亡后公开。");
+                                    break;
+                                case "optional":
+                                    gameManager.setPublicRolesAfterDeath(PublicRolesAfterDeath.OPTIONAL);
+
+                                    break;
+                                default:
+                                    sender.sendMessage(ChatColor.RED + "请输入有效的值（true/false/optional）!");
+                            }
+                        } else {
+                            sender.sendMessage(ChatColor.RED + "用法: /bwsk setpublicrole <true/false/optional>");
+                        }
+                        break;
+
+                    case "start":
+                        if (gameManager.getAssignedPlayers().size() < gameManager.getPlayerCount()) {
+                            sender.sendMessage(ChatColor.RED + "请先分配身份!");
+                            return true;
+                        }
+
+                        if (!BedWars.getAPI().getArenaUtil().isPlaying((Player) sender)) {
+                            sender.sendMessage(ChatColor.RED + "请先进入起床战争!");
+                            return true;
+                        } else {
+                            IArena arena = BedWars.getAPI().getArenaUtil().getArenaByPlayer((Player) sender);
+                            gameManager.startGame(arena);
+                        }
+
+                        sender.sendMessage(ChatColor.GREEN + "游戏开始!");
+                        break;
+
+                    case "status":
+                        sendGameStatus(sender);
+                        break;
+
+                    case "reset":
+                        if (gameManager.isGameStarted()) {
+                            gameManager.resetGame();
+                        } else {
+                            sender.sendMessage(ChatColor.RED + "游戏未开始!");
+                        }
+                        break;
+
+                    default:
+                        sendHelp(sender);
+                        break;
                 }
                 return true;
             }
         }
 
         return false;
+    }
+
+    private void announceRole(Player player) {
+        Role role = gameManager.getPlayerRole(player);
+        if (role == null || !gameManager.isGameStarted()) {
+            return;
+        }
+        Bukkit.broadcastMessage(
+                TeamColor.getChatColor(gameManager.getArena().getTeam(player).getColor().toString())
+                + player.getName() + ChatColor.YELLOW + " 选择公开身份！身份：" +
+                role.getColor() + role.getDisplayName() + ChatColor.YELLOW + "！");
     }
 
     private void sendGameStatus(CommandSender sender) {
@@ -206,6 +272,7 @@ public class BedwarsSKPlugin extends JavaPlugin {
             sender.sendMessage(ChatColor.YELLOW + "/bwsk assign - 分配身份");
             sender.sendMessage(ChatColor.YELLOW + "/bwsk role - 查看自己身份");
             sender.sendMessage(ChatColor.YELLOW + "/bwsk roleall - 查看所有人身份");
+            sender.sendMessage(ChatColor.YELLOW + "/bwsk setpublicrole <true/false/optional> - 设置玩家淘汰后是否公开身份（optional：允许玩家自行选择）");
             sender.sendMessage(ChatColor.YELLOW + "/bwsk start - 开始游戏");
             sender.sendMessage(ChatColor.YELLOW + "/bwsk status - 查看游戏状态");
             sender.sendMessage(ChatColor.YELLOW + "/bwsk reset - 重置游戏");
@@ -213,6 +280,10 @@ public class BedwarsSKPlugin extends JavaPlugin {
             sender.sendMessage(ChatColor.GOLD + "=== BedwarsSK 命令帮助 ===");
             sender.sendMessage(ChatColor.YELLOW + "/bwsk role - 查看自己身份");
             sender.sendMessage(ChatColor.YELLOW + "/bwsk roleall - 查看所有人身份（仅允许在旁观游戏时使用）");
+            if (gameManager.getPublicRolesAfterDeath().equals(PublicRolesAfterDeath.OPTIONAL) ||
+                gameManager.getPublicRolesAfterDeath().equals(PublicRolesAfterDeath.FORCE_PUBLIC)) {
+                sender.sendMessage(ChatColor.YELLOW + "/bwsk publicrole - 宣布自己身份（仅允许在旁观游戏时使用）");
+            }
         }
     }
 }
