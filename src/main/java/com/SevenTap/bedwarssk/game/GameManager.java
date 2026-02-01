@@ -1,5 +1,8 @@
-package com.SevenTap.bedwarssk;
+package com.SevenTap.bedwarssk.game;
 
+import com.SevenTap.bedwarssk.PlayerStatus;
+import com.SevenTap.bedwarssk.PublicRolesAfterDeath;
+import com.SevenTap.bedwarssk.Role;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

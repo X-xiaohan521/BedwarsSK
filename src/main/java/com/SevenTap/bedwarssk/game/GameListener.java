@@ -1,5 +1,6 @@
-package com.SevenTap.bedwarssk;
+package com.SevenTap.bedwarssk.game;
 
+import com.SevenTap.bedwarssk.BedwarsSKPlugin;
 import com.andrei1058.bedwars.api.arena.GameState;
 import com.andrei1058.bedwars.api.events.gameplay.GameStateChangeEvent;
 import com.andrei1058.bedwars.api.events.player.PlayerBedBreakEvent;
@@ -15,8 +16,8 @@ public class GameListener implements Listener {
     private final BedwarsSKPlugin plugin;
     private final GameManager gameManager;
 
-    public GameListener() {
-        this.plugin = BedwarsSKPlugin.getInstance();
+    public GameListener(BedwarsSKPlugin plugin) {
+        this.plugin = plugin;
         this.gameManager = plugin.getGameManager();
     }
 
@@ -26,7 +27,6 @@ public class GameListener implements Listener {
         if (event.getNewState().equals(GameState.playing)) {
             if (gameManager.getAssignedPlayers().size() < gameManager.getPlayerCount()) {
                 Bukkit.broadcastMessage(ChatColor.RED + "未分配三国杀身份，进行普通起床!");
-                return;
             } else {
                 gameManager.startGame(event.getArena());
             }
