@@ -9,12 +9,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc16fb38-881f-4518-9c12-47f1d709c857" name="更改" comment="Polished: 修正一些 warnings">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/command/CommandHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/message/MessageSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/BedwarsSKPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/BedwarsSKPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/GameListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/game/GameListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/game/GameManager.java" afterDir="false" />
+    <list default="true" id="cc16fb38-881f-4518-9c12-47f1d709c857" name="更改" comment="Refactor: 用依赖注入解耦，方便单元测试">
+      <change beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dependency-reduced-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/command/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/command/CommandHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/message/MessageSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/message/MessageSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BedwarsSK.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/BedwarsSKPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/BedwarsSKPlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/GameListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/GameManager$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/GameManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/original-BedwarsSK.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +45,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -49,6 +59,12 @@
     &quot;accountId&quot;: &quot;78010927-279f-4f97-abe1-301ac248d305&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/libs/bedwars-plugin-22.3.4.jar!/com/andrei1058/bedwars/api/arena/team/ITeam.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/libs/bedwars-plugin-22.3.4.jar!/com/andrei1058/bedwars/api/arena/team/TeamColor.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/libs/spigot-api-1.8.8-R0.1-SNAPSHOT.jar!/org/bukkit/command/CommandSender.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/libs/spigot-api-1.8.8-R0.1-SNAPSHOT.jar!/org/bukkit/entity/Player.class" root0="SKIP_INSPECTION" />
+  </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
       <facet id="bedwarssk/invalid/Minecraft" />
@@ -71,11 +87,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Maven.Unknown [clean].executor": "Run",
+    "Maven.bedwarssk [clean].executor": "Run",
+    "Maven.bedwarssk [package].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "1.1-dev",
     "ignore.virus.scanning.warn.message": "true",
@@ -91,7 +110,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "terminal",
+    "settings.editor.selected.configurable": "settings.codegpt.services.ollama",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true",
     "应用程序.Test (1).executor": "Run",
@@ -171,7 +190,7 @@
       <workItem from="1766150917672" duration="779000" />
       <workItem from="1769172595063" duration="399000" />
       <workItem from="1769349614723" duration="11000" />
-      <workItem from="1769867006814" duration="10394000" />
+      <workItem from="1769867006814" duration="16297000" />
     </task>
     <task id="LOCAL-00001" summary="Polished: 1.1 版本起始小修正">
       <option name="closed" value="true" />
@@ -197,7 +216,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769874252850</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Refactor: 用依赖注入解耦，方便单元测试">
+      <option name="closed" value="true" />
+      <created>1769956393392</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1769956393392</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,7 +245,8 @@
     <MESSAGE value="Polished: 1.1 版本起始小修正" />
     <MESSAGE value="Added: 允许设置三种淘汰后身份公开模式：1. 不允许淘汰玩家公开身份（默认） 2. 强制淘汰玩家公开身份 3. 允许淘汰玩家自行选择是否主动亮明身份" />
     <MESSAGE value="Polished: 修正一些 warnings" />
-    <option name="LAST_COMMIT_MESSAGE" value="Polished: 修正一些 warnings" />
+    <MESSAGE value="Refactor: 用依赖注入解耦，方便单元测试" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor: 用依赖注入解耦，方便单元测试" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -230,5 +258,9 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

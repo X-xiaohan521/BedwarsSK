@@ -66,6 +66,7 @@ public class MessageSender {
             sender.sendMessage(ChatColor.YELLOW + "/bwsk role - 查看自己身份");
             sender.sendMessage(ChatColor.YELLOW + "/bwsk roleall - 查看所有人身份");
             sender.sendMessage(ChatColor.YELLOW + "/bwsk setpublicrole <true/false/optional> - 设置玩家淘汰后是否公开身份（optional：允许玩家自行选择）");
+            sender.sendMessage(ChatColor.YELLOW + "/bwsk publicrole - 宣布自己身份（仅允许在旁观游戏时使用）");
             sender.sendMessage(ChatColor.YELLOW + "/bwsk start - 开始游戏");
             sender.sendMessage(ChatColor.YELLOW + "/bwsk status - 查看游戏状态");
             sender.sendMessage(ChatColor.YELLOW + "/bwsk reset - 重置游戏");

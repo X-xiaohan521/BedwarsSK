@@ -3,14 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.SevenTap</groupId>
   <artifactId>bedwarssk</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <build>
     <resources>
       <resource>
         <directory>./resources</directory>
       </resource>
     </resources>
-    <finalName>BedwarsSK</finalName>
+    <finalName>BedwarsSK-v${version}</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -51,9 +51,9 @@
     </dependency>
   </dependencies>
   <properties>
-    <maven.compiler.target>1.8</maven.compiler.target>
     <java.version>1.8</java.version>
-    <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 </project>

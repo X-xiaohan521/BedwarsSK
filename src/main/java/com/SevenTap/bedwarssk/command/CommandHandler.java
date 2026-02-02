@@ -159,6 +159,16 @@ public class CommandHandler implements CommandExecutor {
                         }
                         break;
 
+                    case "publicrole":
+                        // 允许 OP 玩家使用 `/bwsk publicrole` 命令宣布自己身份
+                        if (gameManager.getPublicRolesAfterDeath().equals(PublicRolesAfterDeath.OPTIONAL) ||
+                                gameManager.getPublicRolesAfterDeath().equals(PublicRolesAfterDeath.FORCE_PUBLIC)) {
+                            messageSender.announceRole(player);
+                        } else {
+                            sender.sendMessage(ChatColor.RED + "本局游戏不允许自行公开身份，可用 /bwsk setpublicrole 设置。");
+                        }
+                        return true;
+
                     case "start":
                         if (gameManager.getAssignedPlayers().size() < gameManager.getPlayerCount()) {
                             sender.sendMessage(ChatColor.RED + "请先分配身份!");
