@@ -36,6 +36,7 @@ public class MessageSender {
         sender.sendMessage(ChatColor.YELLOW + "已分配身份玩家: " + gameManager.getAssignedPlayers().size());
         sender.sendMessage(ChatColor.YELLOW + "游戏状态: " +
                 (gameManager.isGameStarted() ? "进行中" : "未开始"));
+        sender.sendMessage(ChatColor.YELLOW + "玩家淘汰后公开身份：" + gameManager.getPublicRolesAfterDeath().getDisplay());
     }
 
     public void sendRole(Player player) {

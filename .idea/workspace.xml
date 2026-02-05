@@ -9,21 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc16fb38-881f-4518-9c12-47f1d709c857" name="更改" comment="Refactor: 用依赖注入解耦，方便单元测试">
-      <change beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dependency-reduced-pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="cc16fb38-881f-4518-9c12-47f1d709c857" name="更改" comment="Fixed: 修复了op玩家无法公布身份的问题">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/BedwarsSKPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/BedwarsSKPlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/command/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/command/CommandHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/message/MessageSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/SevenTap/bedwarssk/message/MessageSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/BedwarsSK.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/BedwarsSKPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/BedwarsSKPlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/GameListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/GameManager$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/GameManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/SevenTap/bedwarssk/Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/original-BedwarsSK.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,39 +76,40 @@
     <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.Unknown [clean].executor": "Run",
-    "Maven.bedwarssk [clean].executor": "Run",
-    "Maven.bedwarssk [package].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "1.1-dev",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Lenovo/IdeaProjects/BedwarsSK",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/Lenovo/IdeaProjects/BedwarsSK/src/main/java/org/example/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "settings.codegpt.services.ollama",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true",
-    "应用程序.Test (1).executor": "Run",
-    "应用程序.Test.executor": "Run"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Maven.Unknown [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.bedwarssk [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.bedwarssk [package].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;1.1-dev&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/IdeaProjects/BedwarsSK&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Lenovo/IdeaProjects/BedwarsSK/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.codegpt.services.ollama&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;应用程序.Test (1).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Test.executor&quot;: &quot;Run&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\dujin\Documents\Code\BedwarsSK\src" />
@@ -190,7 +183,12 @@
       <workItem from="1766150917672" duration="779000" />
       <workItem from="1769172595063" duration="399000" />
       <workItem from="1769349614723" duration="11000" />
-      <workItem from="1769867006814" duration="16297000" />
+      <workItem from="1769867006814" duration="16491000" />
+      <workItem from="1770010085900" duration="2677000" />
+      <workItem from="1770100705822" duration="730000" />
+      <workItem from="1770199566405" duration="11000" />
+      <workItem from="1770205636024" duration="144000" />
+      <workItem from="1770297209940" duration="1275000" />
     </task>
     <task id="LOCAL-00001" summary="Polished: 1.1 版本起始小修正">
       <option name="closed" value="true" />
@@ -224,7 +222,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769956393392</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fixed: 修复了op玩家无法公布身份的问题">
+      <option name="closed" value="true" />
+      <created>1770002700409</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1770002700409</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +252,8 @@
     <MESSAGE value="Added: 允许设置三种淘汰后身份公开模式：1. 不允许淘汰玩家公开身份（默认） 2. 强制淘汰玩家公开身份 3. 允许淘汰玩家自行选择是否主动亮明身份" />
     <MESSAGE value="Polished: 修正一些 warnings" />
     <MESSAGE value="Refactor: 用依赖注入解耦，方便单元测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor: 用依赖注入解耦，方便单元测试" />
+    <MESSAGE value="Fixed: 修复了op玩家无法公布身份的问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed: 修复了op玩家无法公布身份的问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

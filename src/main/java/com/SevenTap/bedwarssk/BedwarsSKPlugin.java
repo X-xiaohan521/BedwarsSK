@@ -28,6 +28,9 @@ public class BedwarsSKPlugin extends JavaPlugin {
         // 注册事件监听器
         Bukkit.getPluginManager().registerEvents(new GameListener(this), this);
 
+        // 注册命令处理器
+        this.getCommand("bwsk").setExecutor(commandHandler);
+
         getLogger().info("BedwarsSK插件已启用!");
         getLogger().info("作者: SevenTap & UniMilk");
         getLogger().info("版本: 1.0.0");

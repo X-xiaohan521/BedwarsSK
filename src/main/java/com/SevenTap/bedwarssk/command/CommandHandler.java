@@ -141,15 +141,15 @@ public class CommandHandler implements CommandExecutor {
                             switch (args[1]) {
                                 case "true":
                                     gameManager.setPublicRolesAfterDeath(PublicRolesAfterDeath.FORCE_PUBLIC);
-                                    sender.sendMessage(ChatColor.YELLOW + "玩家身份将在死亡后公开。");
+                                    sender.sendMessage(ChatColor.GREEN + "玩家身份将在淘汰后公开。");
                                     break;
                                 case "false":
                                     gameManager.setPublicRolesAfterDeath(PublicRolesAfterDeath.FORCE_NOT_PUBLIC);
-                                    sender.sendMessage(ChatColor.YELLOW + "玩家身份将在死亡后公开。");
+                                    sender.sendMessage(ChatColor.GREEN + "玩家身份将不会在淘汰后公开。");
                                     break;
                                 case "optional":
                                     gameManager.setPublicRolesAfterDeath(PublicRolesAfterDeath.OPTIONAL);
-
+                                    sender.sendMessage(ChatColor.GREEN + "玩家可在死亡后选择是否公开身份。");
                                     break;
                                 default:
                                     sender.sendMessage(ChatColor.RED + "请输入有效的值（true/false/optional）!");
