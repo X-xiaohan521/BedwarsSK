@@ -3,7 +3,6 @@ package com.SevenTap.bedwarssk.message;
 import com.SevenTap.bedwarssk.PublicRolesAfterDeath;
 import com.SevenTap.bedwarssk.Role;
 import com.SevenTap.bedwarssk.game.GameManager;
-import com.andrei1058.bedwars.api.arena.team.TeamColor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -23,10 +22,20 @@ public class MessageSender {
         if (role == null || !gameManager.isGameStarted()) {
             return;
         }
-        Bukkit.broadcastMessage(
-                TeamColor.getChatColor(gameManager.getArena().getTeam(player).getColor().toString())
-                        + player.getName() + ChatColor.YELLOW + " 选择公开身份！身份：" +
-                        role.getColor() + role.getDisplayName() + ChatColor.YELLOW + "！");
+        try {
+            Bukkit.broadcastMessage(
+                    ChatColor.YELLOW + player.getName() + " 选择公开身份！身份：" +
+                    role.getColor() + role.getDisplayName() + ChatColor.YELLOW + "！");
+        } catch (NullPointerException npe) {
+            if (gameManager.getArena() == null) {
+                Bukkit.broadcastMessage("Server Internal: gameManager.getArena() == null");
+            } else if (gameManager.getArena().getTeam(player) == null) {
+                // 玩家死亡后已经没有队伍，所以无法获取队伍
+                Bukkit.broadcastMessage("Server Internal: gameManager.getArena().getTeam(player) == null");
+            } else if (gameManager.getArena().getTeam(player).getColor() == null) {
+                Bukkit.broadcastMessage("Server Internal: gameManager.getArena().getTeam(player).getColor() == null");
+            }
+        }
     }
 
     public void sendGameStatus(CommandSender sender) {
