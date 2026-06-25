@@ -1,0 +1,62 @@
+shop-category:
+  slot: 8
+  icon: REDSTONE_TORCH_ON
+  name: "&c&l魔法道具"
+  lore:
+    - "&7三国杀身份特殊道具"
+
+cooldown-seconds: 30.0
+
+wands:
+  level1:
+    display-name: "&a&l一级魔法之杖"
+    cost: 3
+    lore:
+      identifier:
+        - "&7[BedwarsSK 魔法道具]"
+      marker:
+        - "&8/bwsk-magicwand"
+    sound: ORB_PICKUP
+  level2:
+    display-name: "&e&l二级魔法之杖"
+    cost: 5
+    lore:
+      identifier:
+        - "&7[BedwarsSK 魔法道具]"
+      marker:
+        - "&8/bwsk-magicwand"
+    sound: LEVEL_UP
+  level3:
+    display-name: "&b&l三级魔法之杖"
+    cost: 9
+    lore:
+      identifier:
+        - "&7[BedwarsSK 魔法道具]"
+      marker:
+        - "&8/bwsk-magicwand"
+    sound: ANVIL_LAND
+
+messages:
+  use:
+    level1:
+      attacker: "&6&l>> &a对 {victim} 使用了一级魔法之杖，{victim} 的身份不是 {role}！"
+      victim: "&6&l>> &c{attacker} 对你使用了一级魔法之杖，你的身份线索被对方掌握！"
+    level2:
+      attacker: "&6&l>> &a对 {victim} 使用了二级魔法之杖，{victim} 的身份不是 {role1} 或 {role2}！"
+      victim: "&6&l>> &c{attacker} 对你使用了二级魔法之杖，你的身份线索被对方掌握！"
+    level3:
+      attacker: "&6&l>> &a对 {victim} 使用了三级魔法之杖，{victim} 的身份是 {role}！"
+      victim: "&6&l>> &c{attacker} 对你使用了三级魔法之杖，你的身份被对方掌握！"
+  cooldown:
+    attacker: "&c&l失败! &7对该玩家的魔法攻击冷却中！剩余 {seconds} 秒"
+  invalid:
+    no-role: "&c你或目标玩家当前没有身份，魔法道具无法生效。"
+    same-team: "&c不能对队友使用魔法道具。"
+  sounds:
+    use.level1.attacker-sound: ORB_PICKUP
+    use.level1.victim-sound: CLICK
+    use.level2.attacker-sound: LEVEL_UP
+    use.level2.victim-sound: CLICK
+    use.level3.attacker-sound: ANVIL_LAND
+    use.level3.victim-sound: CLICK
+    cooldown-failed: ENDERMAN_TELEPORT

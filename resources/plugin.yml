@@ -16,3 +16,9 @@ permissions:
   bwsk.use:
     description: 允许使用BedwarsSK命令
     default: true
+  bwsk.magicwand.use:
+    description: 允许使用魔法道具
+    default: true
+  bwsk.magicwand.buy:
+    description: 允许购买魔法道具
+    default: true

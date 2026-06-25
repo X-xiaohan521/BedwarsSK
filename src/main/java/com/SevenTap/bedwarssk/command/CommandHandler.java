@@ -6,6 +6,8 @@ import java.util.List;
 import com.SevenTap.bedwarssk.game.GameManager;
 import com.SevenTap.bedwarssk.PlayerStatus;
 import com.SevenTap.bedwarssk.PublicRolesAfterDeath;
+import com.SevenTap.bedwarssk.item.MagicWandManager;
+import com.SevenTap.bedwarssk.item.MagicWandType;
 import com.SevenTap.bedwarssk.message.MessageSender;
 import com.andrei1058.bedwars.BedWars;
 import com.andrei1058.bedwars.api.arena.IArena;
@@ -22,9 +24,12 @@ public class CommandHandler implements CommandExecutor {
 
     private final GameManager gameManager;
     private final MessageSender messageSender;
-    public CommandHandler(GameManager gameManager, MessageSender messageSender) {
+    private final MagicWandManager magicWandManager;
+
+    public CommandHandler(GameManager gameManager, MessageSender messageSender, MagicWandManager magicWandManager) {
         this.gameManager = gameManager;
         this.messageSender = messageSender;
+        this.magicWandManager = magicWandManager;
     }
 
     @Override
@@ -167,6 +172,23 @@ public class CommandHandler implements CommandExecutor {
                         } else {
                             sender.sendMessage(ChatColor.RED + "本局游戏不允许自行公开身份，可用 /bwsk setpublicrole 设置。");
                         }
+                        return true;
+
+                    case "givewands":
+                        if (args.length != 2) {
+                            sender.sendMessage(ChatColor.RED + "用法: /bwsk givewands <player>");
+                            return true;
+                        }
+                        Player target = Bukkit.getPlayer(args[1]);
+                        if (target == null) {
+                            sender.sendMessage(ChatColor.RED + "玩家未在线或不存在: " + args[1]);
+                            return true;
+                        }
+                        target.getInventory().addItem(magicWandManager.createWand(MagicWandType.LEVEL1));
+                        target.getInventory().addItem(magicWandManager.createWand(MagicWandType.LEVEL2));
+                        target.getInventory().addItem(magicWandManager.createWand(MagicWandType.LEVEL3));
+                        sender.sendMessage(ChatColor.GREEN + "已向 " + target.getName() + " 发放三把魔法锄头。");
+                        target.sendMessage(ChatColor.GREEN + "你已获得三把 BedwarsSK 魔法锄头。");
                         return true;
 
                     case "start":

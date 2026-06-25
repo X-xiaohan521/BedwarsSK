@@ -24,6 +24,7 @@ public class GameManager {
     private int playerCount = 8; // 默认8人
     private boolean isEmperorShown = true; // 默认显示主公
     private boolean gameStarted = false;
+    private boolean identityGame = false;
     private IArena arena;   // 起床地图
     private PublicRolesAfterDeath publicRolesAfterDeath = PublicRolesAfterDeath.FORCE_NOT_PUBLIC;
 
@@ -78,6 +79,14 @@ public class GameManager {
         return publicRolesAfterDeath;
     }
 
+    public boolean isIdentityGame() {
+        return identityGame;
+    }
+
+    public void setIdentityGame(boolean identityGame) {
+        this.identityGame = identityGame;
+    }
+
     public IArena getArena() {
         return arena;
     }
@@ -85,6 +94,7 @@ public class GameManager {
     public void assignRoles(List<Player> players) {
         if (players.size() != playerCount) {
             Bukkit.broadcastMessage(ChatColor.RED + "错误：玩家数量不匹配!");
+            identityGame = false;
             return;
         }
 
@@ -112,6 +122,7 @@ public class GameManager {
             }
         }
 
+        identityGame = true;
         Bukkit.broadcastMessage(ChatColor.GREEN + "身份分配完成！");
     }
 
@@ -192,6 +203,7 @@ public class GameManager {
         playerRoles.clear();
         playerStatus.clear();
         gameStarted = false;
+        identityGame = false;
         arena = null;
 
         hideEmperor();
