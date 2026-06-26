@@ -38,6 +38,7 @@ public class MagicWandListener implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        // 这个方法重点测试攻击玩家
         if (!(event.getDamager() instanceof Player)) {
             return;
         }
@@ -81,6 +82,7 @@ public class MagicWandListener implements Listener {
             return;
         }
 
+        // 处理冷却时间逻辑
         String pairKey = attacker.getUniqueId().toString() + "_" + victim.getUniqueId().toString();
         long now = System.currentTimeMillis();
         long cooldownMillis = (long) (wandManager.getCooldownSeconds() * 1000);
@@ -116,7 +118,7 @@ public class MagicWandListener implements Listener {
         }
 
         if (!gameManager.isGameStarted() || !gameManager.isIdentityGame()) {
-            event.setCancelled(true);
+            event.setCancelled(true);   // 这里这个接口调用有可能有问题，导致购买事件没能被拦截，玩家还是买到了锄头
             Player buyer = event.getBuyer();
             if (buyer != null) {
                 buyer.sendMessage(ChatColor.RED + "当前不是身份起床对局，魔法道具不可购买。" );
@@ -126,6 +128,7 @@ public class MagicWandListener implements Listener {
 
         Player buyer = event.getBuyer();
         if (buyer != null) {
+            // 不能直接从购买事件中拦截物品，返还魔法物品吗？为什么要购买之后扫描背包，感觉性能有点差，鲁棒性也不好
             Bukkit.getScheduler().runTask(plugin, () -> replacePurchasedWand(buyer, wandType));
         }
     }
@@ -135,6 +138,7 @@ public class MagicWandListener implements Listener {
             return;
         }
 
+        // 扫描背包替换
         PlayerInventory inventory = player.getInventory();
         for (int slot = 0; slot < inventory.getSize(); slot++) {
             ItemStack item = inventory.getItem(slot);
@@ -146,7 +150,7 @@ public class MagicWandListener implements Listener {
             }
 
             if (item.getAmount() > 1) {
-                item.setAmount(item.getAmount() - 1);
+                item.setAmount(item.getAmount() - 1);   // 这是何意味？为什么是只扣除一个？变相允许了玩家拥有原始锄头？
                 inventory.setItem(slot, item);
                 addOrDrop(player, wandManager.createWand(type));
             } else {
@@ -155,8 +159,9 @@ public class MagicWandListener implements Listener {
             return;
         }
 
+        // 扫描手中物品替换
         ItemStack handItem = player.getItemInHand();
-        if (handItem != null && handItem.getType() == type.getMaterial() && !wandManager.isMagicWand(handItem)) {
+        if (handItem != null && handItem.getType() == type.getMaterial() && !wandManager.isMagicWand(handItem)) {   // 这里最后一个判断条件是不是写反了？
             if (handItem.getAmount() > 1) {
                 handItem.setAmount(handItem.getAmount() - 1);
                 player.setItemInHand(handItem);
@@ -253,7 +258,7 @@ public class MagicWandListener implements Listener {
 
     private void consumeItem(Player attacker, ItemStack item) {
         if (item.getAmount() > 1) {
-            item.setAmount(item.getAmount() - 1);
+            item.setAmount(item.getAmount() - 1);   // 还是这个逻辑，魔杖允许堆叠吗？
         } else {
             attacker.setItemInHand(null);
         }

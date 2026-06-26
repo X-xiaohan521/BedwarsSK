@@ -70,9 +70,12 @@ public class MagicWandManager {
      * @return whether the item is a magic wand
      */
     public boolean isMagicWand(ItemStack item) {
+        // 这个方法建议重构或者加注释，逻辑可读性比较差
         if (item == null || item.getType() == Material.AIR) {
             return false;
         }
+
+        // 拦截不属于 MagicWandType 中定义的类别的物品
         MagicWandType type = MagicWandType.fromMaterial(item.getType());
         if (type == null) {
             return false;
@@ -82,6 +85,7 @@ public class MagicWandManager {
             return false;
         }
 
+        // 通过物品显示名称（如果有）判断
         String expectedName = getWandDisplayName(type);
         String rawConfigName = config.getString("wands." + type.getConfigKey() + ".display-name", expectedName);
         if (meta.hasDisplayName()) {
