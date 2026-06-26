@@ -86,8 +86,9 @@ public class MagicWandManager {
         }
 
         // 通过物品显示名称（如果有）判断
-        String expectedName = getWandDisplayName(type);
-        String rawConfigName = config.getString("wands." + type.getConfigKey() + ".display-name", expectedName);
+        String rawConfigName = config.getString("wands." + type.getConfigKey() + ".display-name");
+        String expectedName = ColorUtil.translateColors(rawConfigName);
+
         if (meta.hasDisplayName()) {
             String displayName = meta.getDisplayName();
             if (expectedName.equals(displayName) || rawConfigName.equals(displayName)) {
@@ -143,10 +144,6 @@ public class MagicWandManager {
 
     public int getWandCost(MagicWandType type) {
         return config.getInt("wands." + type.getConfigKey() + ".cost", 0);
-    }
-
-    public String getWandDisplayName(MagicWandType type) {
-        return ColorUtil.translateColors(config.getString("wands." + type.getConfigKey() + ".display-name", "&a&l魔法之杖"));
     }
 
     public int getCategorySlot() {

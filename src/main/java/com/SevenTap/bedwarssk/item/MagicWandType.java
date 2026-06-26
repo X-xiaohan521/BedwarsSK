@@ -1,6 +1,7 @@
 package com.SevenTap.bedwarssk.item;
 
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 
 public enum MagicWandType {
     LEVEL1("level1", Material.STONE_HOE),
@@ -41,13 +42,24 @@ public enum MagicWandType {
         return null;
     }
 
-    public static MagicWandType fromIdentifier(String identifier) {
+    public static MagicWandType from1058Identifier(String identifier, FileConfiguration config) {
         if (identifier == null) {
             return null;
         }
-        if (identifier.endsWith("-wand")) {
-            identifier = identifier.substring(0, identifier.length() - 5);
+        for (MagicWandType type : values()) {
+            String id58 = config.getString("wands." + type.configKey + ".1058-identifier");
+            if (id58.equals(identifier)) {
+                return type;
+            }
         }
-        return fromConfigKey(identifier);
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "MagicWandType{" +
+                "configKey='" + configKey + '\'' +
+                ", material=" + material +
+                '}';
     }
 }

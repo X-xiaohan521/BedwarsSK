@@ -11,7 +11,6 @@ import com.andrei1058.bedwars.api.arena.shop.ICategoryContent;
 import com.andrei1058.bedwars.api.events.shop.ShopBuyEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -112,13 +111,13 @@ public class MagicWandListener implements Listener {
         }
 
         String identifier = content.getIdentifier();
-        MagicWandType wandType = MagicWandType.fromIdentifier(identifier);
+        MagicWandType wandType = MagicWandType.from1058Identifier(identifier, plugin.getConfig());
         if (wandType == null) {
             return;
         }
 
         if (!gameManager.isGameStarted() || !gameManager.isIdentityGame()) {
-            event.setCancelled(true);   // 这里这个接口调用有可能有问题，导致购买事件没能被拦截，玩家还是买到了锄头
+            event.setCancelled(true);
             Player buyer = event.getBuyer();
             if (buyer != null) {
                 buyer.sendMessage(ChatColor.RED + "当前不是身份起床对局，魔法道具不可购买。" );
@@ -128,7 +127,6 @@ public class MagicWandListener implements Listener {
 
         Player buyer = event.getBuyer();
         if (buyer != null) {
-            // 不能直接从购买事件中拦截物品，返还魔法物品吗？为什么要购买之后扫描背包，感觉性能有点差，鲁棒性也不好
             Bukkit.getScheduler().runTask(plugin, () -> replacePurchasedWand(buyer, wandType));
         }
     }
@@ -145,7 +143,7 @@ public class MagicWandListener implements Listener {
             if (item == null || item.getType() != type.getMaterial()) {
                 continue;
             }
-            if (wandManager.isMagicWand(item)) {
+            if (!wandManager.isMagicWand(item)) {
                 continue;
             }
             inventory.setItem(slot, wandManager.createWand(type));

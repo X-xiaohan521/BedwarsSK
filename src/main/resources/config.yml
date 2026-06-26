@@ -11,6 +11,7 @@ wands:
   level1:
     display-name: "&a&l一级魔法之杖"
     cost: 3
+    1058-identifier: "magic-category.category-content.level1-wand"
     lore:
       identifier:
         - "&7[BedwarsSK 魔法道具]"
@@ -20,6 +21,7 @@ wands:
   level2:
     display-name: "&e&l二级魔法之杖"
     cost: 5
+    1058-identifier: "magic-category.category-content.level2-wand"
     lore:
       identifier:
         - "&7[BedwarsSK 魔法道具]"
@@ -29,6 +31,7 @@ wands:
   level3:
     display-name: "&b&l三级魔法之杖"
     cost: 9
+    1058-identifier: "magic-category.category-content.level3-wand"
     lore:
       identifier:
         - "&7[BedwarsSK 魔法道具]"
