@@ -1,9 +1,0 @@
-com\SevenTap\bedwarssk\message\MessageSender.class
-com\SevenTap\bedwarssk\command\CommandHandler.class
-com\SevenTap\bedwarssk\game\GameManager$1.class
-com\SevenTap\bedwarssk\game\GameListener.class
-com\SevenTap\bedwarssk\Role.class
-com\SevenTap\bedwarssk\game\GameManager.class
-com\SevenTap\bedwarssk\BedwarsSKPlugin.class
-com\SevenTap\bedwarssk\PlayerStatus.class
-com\SevenTap\bedwarssk\PublicRolesAfterDeath.class
