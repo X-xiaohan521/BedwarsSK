@@ -40,6 +40,11 @@ public class MagicWandManager {
         return new ArrayList<>(categoryLore);
     }
 
+    /**
+     * 根据魔杖枚举创建魔杖物品。
+     * @param type 想要创建的魔杖种类。
+     * @return 对应游戏内物品。
+     */
     public ItemStack createWand(MagicWandType type) {
         String path = "wands." + type.getConfigKey() + ".";
         String displayName = config.getString(path + "display-name", "&a&l魔法之杖");
@@ -59,6 +64,11 @@ public class MagicWandManager {
         return item;
     }
 
+    /**
+     * 判断传入的物品是否是魔杖。
+     * @param item the item to be judged
+     * @return whether the item is a magic wand
+     */
     public boolean isMagicWand(ItemStack item) {
         if (item == null || item.getType() == Material.AIR) {
             return false;

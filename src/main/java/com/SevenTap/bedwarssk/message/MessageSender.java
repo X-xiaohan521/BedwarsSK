@@ -72,6 +72,12 @@ public class MessageSender {
         }
     }
 
+    /**
+     * 根据配置文件获格式化取消息字符串。
+     * @param path 消息在 `config.yml` 中的路径
+     * @param replacements 需要替换的模板，以 {@code key, value} 形式传入，例如 {@code messageSender.getMessage("cooldown.attacker", "seconds", String.format(Locale.US, "%.1f", remainSeconds)}
+     * @return 格式化后的消息
+     */
     public String getMessage(String path, Object... replacements) {
         String template = config.getString("messages." + path, "");
         if (template == null) {
