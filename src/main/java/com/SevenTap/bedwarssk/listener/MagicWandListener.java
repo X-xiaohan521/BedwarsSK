@@ -101,7 +101,7 @@ public class MagicWandListener implements Listener {
 
         executeWandEffect(attacker, victim, attackerRole, victimRole, wandType);
         cooldownMap.put(pairKey, now);
-        consumeItem(attacker, handItem);
+        attacker.setItemInHand(null);
     }
 
     @EventHandler
@@ -148,36 +148,8 @@ public class MagicWandListener implements Listener {
             if (wandManager.isMagicWand(item)) {
                 continue;
             }
-
-            if (item.getAmount() > 1) {
-                item.setAmount(item.getAmount() - 1);   // 这是何意味？为什么是只扣除一个？变相允许了玩家拥有原始锄头？
-                inventory.setItem(slot, item);
-                addOrDrop(player, wandManager.createWand(type));
-            } else {
-                inventory.setItem(slot, wandManager.createWand(type));
-            }
+            inventory.setItem(slot, wandManager.createWand(type));
             return;
-        }
-
-        // 扫描手中物品替换
-        ItemStack handItem = player.getItemInHand();
-        if (handItem != null && handItem.getType() == type.getMaterial() && !wandManager.isMagicWand(handItem)) {   // 这里最后一个判断条件是不是写反了？
-            if (handItem.getAmount() > 1) {
-                handItem.setAmount(handItem.getAmount() - 1);
-                player.setItemInHand(handItem);
-                addOrDrop(player, wandManager.createWand(type));
-            } else {
-                player.setItemInHand(wandManager.createWand(type));
-            }
-        }
-    }
-
-    private void addOrDrop(Player player, ItemStack item) {
-        Map<Integer, ItemStack> overflow = player.getInventory().addItem(item);
-        if (!overflow.isEmpty()) {
-            for (ItemStack overflowItem : overflow.values()) {
-                player.getWorld().dropItemNaturally(player.getLocation(), overflowItem);
-            }
         }
     }
 
@@ -254,14 +226,6 @@ public class MagicWandListener implements Listener {
         roles.remove(victimRole);
         Collections.shuffle(roles);
         return roles.subList(0, 2);
-    }
-
-    private void consumeItem(Player attacker, ItemStack item) {
-        if (item.getAmount() > 1) {
-            item.setAmount(item.getAmount() - 1);   // 还是这个逻辑，魔杖允许堆叠吗？
-        } else {
-            attacker.setItemInHand(null);
-        }
     }
 
     private void playSound(Player player, String soundName) {
