@@ -21,10 +21,6 @@
         <finalName>BedwarsSK-v${version}</finalName>
         <resources>
             <resource>
-                <directory>./resources</directory>
-                <filtering>false</filtering>
-            </resource>
-            <resource>
                 <directory>src/main/resources</directory>
                 <filtering>false</filtering>
             </resource>

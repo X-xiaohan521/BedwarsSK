@@ -1,5 +1,5 @@
 name: BedwarsSK
-version: 1.0.0
+version: 1.1.0
 main: com.SevenTap.bedwarssk.BedwarsSKPlugin
 api-version: 1.8
 description: 三国杀风格起床战争插件
