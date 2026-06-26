@@ -225,23 +225,30 @@ public class MagicWandListener implements Listener {
         }
     }
 
+    /**
+     * 生成一级魔杖排除的身份。从总共4种身份中，排除魔杖使用者与受击者的身份，随机获取剩余两种或三种（当两者身份相同时）身份中的一种。
+     * @param attackerRole 魔杖使用者的身份
+     * @param victimRole 受击者的身份
+     * @return 魔杖帮助其使用者随机排除的受击者身份
+     */
     private Role generateLevel1Role(Role attackerRole, Role victimRole) {
-        List<Role> candidate = new ArrayList<>(Arrays.asList(Role.values()));
-        candidate.remove(attackerRole);
-        candidate.remove(victimRole);
-        Collections.shuffle(candidate);
-        if (candidate.isEmpty()) {
-            candidate = new ArrayList<>(Arrays.asList(Role.values()));
-            candidate.remove(attackerRole);
-        }
-        return candidate.get(0);
+        List<Role> roles = new ArrayList<>(Arrays.asList(Role.values()));
+        roles.remove(attackerRole);
+        roles.remove(victimRole);
+        Collections.shuffle(roles);
+        return roles.get(0);
     }
 
+    /**
+     * 生成二级魔杖排除的身份。从总共4种身份中，排除被攻击者的身份，随机获取剩余三种身份中的两种。
+     * @param victimRole 受击者的身份
+     * @return 魔杖帮助其使用者随机排除的受击者身份列表
+     */
     private List<Role> generateLevel2Roles(Role victimRole) {
-        List<Role> candidate = new ArrayList<>(Arrays.asList(Role.values()));
-        candidate.remove(victimRole);
-        Collections.shuffle(candidate);
-        return candidate.subList(0, 2);
+        List<Role> roles = new ArrayList<>(Arrays.asList(Role.values()));
+        roles.remove(victimRole);
+        Collections.shuffle(roles);
+        return roles.subList(0, 2);
     }
 
     private void consumeItem(Player attacker, ItemStack item) {
