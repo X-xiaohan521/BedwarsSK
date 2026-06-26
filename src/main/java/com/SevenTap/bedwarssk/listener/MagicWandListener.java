@@ -5,6 +5,7 @@ import com.SevenTap.bedwarssk.Role;
 import com.SevenTap.bedwarssk.game.GameManager;
 import com.SevenTap.bedwarssk.item.MagicWandManager;
 import com.SevenTap.bedwarssk.item.MagicWandType;
+import com.SevenTap.bedwarssk.message.MessageSender;
 import com.andrei1058.bedwars.api.arena.IArena;
 import com.andrei1058.bedwars.api.arena.shop.ICategoryContent;
 import com.andrei1058.bedwars.api.events.shop.ShopBuyEvent;
@@ -25,12 +26,14 @@ public class MagicWandListener implements Listener {
     private final BedwarsSKPlugin plugin;
     private final GameManager gameManager;
     private final MagicWandManager wandManager;
+    private final MessageSender messageSender;
     private final Map<String, Long> cooldownMap = new HashMap<>();
 
-    public MagicWandListener(BedwarsSKPlugin plugin, GameManager gameManager, MagicWandManager wandManager) {
+    public MagicWandListener(BedwarsSKPlugin plugin, GameManager gameManager, MagicWandManager wandManager, MessageSender messageSender) {
         this.plugin = plugin;
         this.gameManager = gameManager;
         this.wandManager = wandManager;
+        this.messageSender = messageSender;
     }
 
     @EventHandler
@@ -58,7 +61,7 @@ public class MagicWandListener implements Listener {
         Role attackerRole = gameManager.getPlayerRole(attacker);
         Role victimRole = gameManager.getPlayerRole(victim);
         if (attackerRole == null || victimRole == null) {
-            attacker.sendMessage(wandManager.getMessage("invalid.no-role"));
+            attacker.sendMessage(messageSender.getMessage("invalid.no-role"));
             return;
         }
 
@@ -74,7 +77,7 @@ public class MagicWandListener implements Listener {
         }
 
         if (arena.getTeam(attacker).equals(arena.getTeam(victim))) {
-            attacker.sendMessage(wandManager.getMessage("invalid.same-team"));
+            attacker.sendMessage(messageSender.getMessage("invalid.same-team"));
             return;
         }
 
@@ -83,8 +86,8 @@ public class MagicWandListener implements Listener {
         long cooldownMillis = (long) (wandManager.getCooldownSeconds() * 1000);
         Long lastUse = cooldownMap.get(pairKey);
         if (lastUse != null && now - lastUse < cooldownMillis) {
-            double remain = (cooldownMillis - (now - lastUse)) / 1000.0;
-            attacker.sendMessage(wandManager.getMessage("cooldown.attacker", "seconds", String.format(Locale.US, "%.1f", remain)));
+            double remainSeconds = (cooldownMillis - (now - lastUse)) / 1000.0;
+            attacker.sendMessage(messageSender.getMessage("cooldown.attacker", "seconds", String.format(Locale.US, "%.1f", remainSeconds)));
             playSound(attacker, wandManager.getSoundName("cooldown-failed", "ENDERMAN_TELEPORT"));
             return;
         }
@@ -176,13 +179,13 @@ public class MagicWandListener implements Listener {
     private void executeWandEffect(Player attacker, Player victim, Role attackerRole, Role victimRole, MagicWandType wandType) {
         switch (wandType) {
             case LEVEL1:
-                Role invalidRole = generateLevel1Role(attackerRole, victimRole);
-                attacker.sendMessage(wandManager.getMessage(
+                Role roleToBeExcluded = generateLevel1Role(attackerRole, victimRole);
+                attacker.sendMessage(messageSender.getMessage(
                         "use.level1.attacker",
                         "victim", victim.getName(),
-                        "role", invalidRole.getDisplayName())
+                        "role", roleToBeExcluded.getDisplayName())
                 );
-                victim.sendMessage(wandManager.getMessage(
+                victim.sendMessage(messageSender.getMessage(
                         "use.level1.victim",
                         "attacker", attacker.getName())
                 );
@@ -190,14 +193,14 @@ public class MagicWandListener implements Listener {
                 playSound(victim, wandManager.getSoundName("use.level1.victim-sound", "CLICK"));
                 break;
             case LEVEL2:
-                List<Role> invalidRoles = generateLevel2Roles(victimRole);
-                attacker.sendMessage(wandManager.getMessage(
+                List<Role> rolesToBeExcluded = generateLevel2Roles(victimRole);
+                attacker.sendMessage(messageSender.getMessage(
                         "use.level2.attacker",
                         "victim", victim.getName(),
-                        "role1", invalidRoles.get(0).getDisplayName(),
-                        "role2", invalidRoles.get(1).getDisplayName())
+                        "role1", rolesToBeExcluded.get(0).getDisplayName(),
+                        "role2", rolesToBeExcluded.get(1).getDisplayName())
                 );
-                victim.sendMessage(wandManager.getMessage(
+                victim.sendMessage(messageSender.getMessage(
                         "use.level2.victim",
                         "attacker", attacker.getName())
                 );
@@ -205,12 +208,12 @@ public class MagicWandListener implements Listener {
                 playSound(victim, wandManager.getSoundName("use.level2.victim-sound", "CLICK"));
                 break;
             case LEVEL3:
-                attacker.sendMessage(wandManager.getMessage(
+                attacker.sendMessage(messageSender.getMessage(
                         "use.level3.attacker",
                         "victim", victim.getName(),
                         "role", victimRole.getDisplayName())
                 );
-                victim.sendMessage(wandManager.getMessage(
+                victim.sendMessage(messageSender.getMessage(
                         "use.level3.victim",
                         "attacker", attacker.getName())
                 );

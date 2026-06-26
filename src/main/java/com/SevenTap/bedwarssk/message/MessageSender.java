@@ -1,19 +1,24 @@
 package com.SevenTap.bedwarssk.message;
 
+import com.SevenTap.bedwarssk.BedwarsSKPlugin;
 import com.SevenTap.bedwarssk.PublicRolesAfterDeath;
 import com.SevenTap.bedwarssk.Role;
 import com.SevenTap.bedwarssk.game.GameManager;
+import com.SevenTap.bedwarssk.util.ColorUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
 
 public class MessageSender {
+    private final FileConfiguration config;
     private final GameManager gameManager;
 
-    public MessageSender(GameManager gameManager) {
+    public MessageSender(BedwarsSKPlugin plugin, GameManager gameManager) {
+        this.config = plugin.getConfig();
         this.gameManager = gameManager;
     }
 
@@ -65,6 +70,24 @@ public class MessageSender {
             player.sendMessage(entry.getValue().getColor() + entry.getKey() +
                     ": " + entry.getValue().getDisplayName());
         }
+    }
+
+    public String getMessage(String path, Object... replacements) {
+        String template = config.getString("messages." + path, "");
+        if (template == null) {
+            return "";
+        }
+        return formatTemplate(template, replacements);
+    }
+
+    private String formatTemplate(String template, Object... replacements) {
+        String result = ColorUtil.translateColors(template);
+        for (int i = 0; i + 1 < replacements.length; i += 2) {
+            String key = String.valueOf(replacements[i]);
+            String value = String.valueOf(replacements[i + 1]);
+            result = result.replace("{" + key + "}", value);
+        }
+        return result;
     }
 
     public void sendHelp(CommandSender sender) {

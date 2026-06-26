@@ -1,6 +1,7 @@
 package com.SevenTap.bedwarssk.item;
 
 import com.SevenTap.bedwarssk.BedwarsSKPlugin;
+import com.SevenTap.bedwarssk.util.ColorUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -9,9 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 public class MagicWandManager {
     private static final String IDENTIFIER_KEY = "[BedwarsSK 魔法道具]";
@@ -25,8 +24,8 @@ public class MagicWandManager {
     public MagicWandManager(BedwarsSKPlugin plugin) {
         this.config = plugin.getConfig();
         this.cooldownSeconds = config.getDouble("cooldown-seconds", 30.0);
-        this.categoryName = translateColors(config.getString("shop-category.name", "&c&l魔法道具"));
-        this.categoryLore = translateColorsList(config.getStringList("shop-category.lore"));
+        this.categoryName = ColorUtil.translateColors(config.getString("shop-category.name", "&c&l魔法道具"));
+        this.categoryLore = ColorUtil.translateColorsList(config.getStringList("shop-category.lore"));
     }
 
     public double getCooldownSeconds() {
@@ -47,12 +46,12 @@ public class MagicWandManager {
         List<String> lore = new ArrayList<>();
         lore.addAll(config.getStringList(path + "lore.identifier"));
         lore.addAll(config.getStringList(path + "lore.marker"));
-        List<String> formattedLore = translateColorsList(lore);
+        List<String> formattedLore = ColorUtil.translateColorsList(lore);
 
         ItemStack item = new ItemStack(type.getMaterial());
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName(translateColors(displayName));
+            meta.setDisplayName(ColorUtil.translateColors(displayName));
             meta.setLore(formattedLore);
             meta.addEnchant(Enchantment.DURABILITY, 1, true);
             item.setItemMeta(meta);
@@ -95,8 +94,8 @@ public class MagicWandManager {
 
         String identifier = config.getString("wands." + type.getConfigKey() + ".lore.identifier.0", IDENTIFIER_KEY);
         String marker = config.getString("wands." + type.getConfigKey() + ".lore.marker.0", MARKER_KEY);
-        String expectedIdentifier = translateColors(identifier);
-        String expectedMarker = translateColors(marker);
+        String expectedIdentifier = ColorUtil.translateColors(identifier);
+        String expectedMarker = ColorUtil.translateColors(marker);
         boolean hasIdentifier = false;
         boolean hasMarker = false;
         for (String line : lore) {
@@ -124,24 +123,6 @@ public class MagicWandManager {
         return MagicWandType.fromMaterial(item.getType());
     }
 
-    public String getMessage(String path, Object... replacements) {
-        String template = config.getString("messages." + path, "");
-        if (template == null) {
-            return "";
-        }
-        return formatTemplate(template, replacements);
-    }
-
-    private String formatTemplate(String template, Object... replacements) {
-        String result = translateColors(template);
-        for (int i = 0; i + 1 < replacements.length; i += 2) {
-            String key = String.valueOf(replacements[i]);
-            String value = String.valueOf(replacements[i + 1]);
-            result = result.replace("{" + key + "}", value);
-        }
-        return result;
-    }
-
     public String getSoundName(String path, String defaultName) {
         return config.getString("messages.sounds." + path, defaultName);
     }
@@ -151,7 +132,7 @@ public class MagicWandManager {
     }
 
     public String getWandDisplayName(MagicWandType type) {
-        return translateColors(config.getString("wands." + type.getConfigKey() + ".display-name", "&a&l魔法之杖"));
+        return ColorUtil.translateColors(config.getString("wands." + type.getConfigKey() + ".display-name", "&a&l魔法之杖"));
     }
 
     public int getCategorySlot() {
@@ -160,23 +141,5 @@ public class MagicWandManager {
 
     public Material getCategoryIcon() {
         return Material.matchMaterial(config.getString("shop-category.icon", "REDSTONE_TORCH_ON"));
-    }
-
-    private String translateColors(String input) {
-        if (input == null) {
-            return null;
-        }
-        return ChatColor.translateAlternateColorCodes('&', input);
-    }
-
-    private List<String> translateColorsList(List<String> input) {
-        if (input == null) {
-            return Collections.emptyList();
-        }
-        List<String> result = new ArrayList<>();
-        for (String line : input) {
-            result.add(translateColors(line));
-        }
-        return result;
     }
 }

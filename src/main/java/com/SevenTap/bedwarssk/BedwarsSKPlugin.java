@@ -27,13 +27,13 @@ public class BedwarsSKPlugin extends JavaPlugin {
 
         // Dependency Injection
         gameManager = new GameManager();
-        messageSender = new MessageSender(gameManager);
+        messageSender = new MessageSender(this, gameManager);
         magicWandManager = new MagicWandManager(this);
         commandHandler = new CommandHandler(gameManager, messageSender, magicWandManager);
 
         // 注册事件监听器
         Bukkit.getPluginManager().registerEvents(new GameListener(this), this);
-        Bukkit.getPluginManager().registerEvents(new MagicWandListener(this, gameManager, magicWandManager), this);
+        Bukkit.getPluginManager().registerEvents(new MagicWandListener(this, gameManager, magicWandManager, messageSender), this);
 
         // 注册命令处理器
         this.getCommand("bwsk").setExecutor(commandHandler);
