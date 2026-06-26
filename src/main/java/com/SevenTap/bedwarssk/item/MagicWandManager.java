@@ -17,14 +17,12 @@ public class MagicWandManager {
     private static final String IDENTIFIER_KEY = "[BedwarsSK 魔法道具]";
     private static final String MARKER_KEY = "/bwsk-magicwand";
 
-    private final BedwarsSKPlugin plugin;
     private final FileConfiguration config;
     private final double cooldownSeconds;
     private final String categoryName;
     private final List<String> categoryLore;
 
     public MagicWandManager(BedwarsSKPlugin plugin) {
-        this.plugin = plugin;
         this.config = plugin.getConfig();
         this.cooldownSeconds = config.getDouble("cooldown-seconds", 30.0);
         this.categoryName = translateColors(config.getString("shop-category.name", "&c&l魔法道具"));
