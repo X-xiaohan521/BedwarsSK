@@ -1,0 +1,3 @@
+Bedwars1058的商店受两个配置文件影响：shop.yml与messages_en.yml
+商店的栏目显示与物品显示名称受本地化文件的影响，即：messages_en.yml
+shop.yml主要影响的是商品的内容而非名称，名称受messages_en.yml影响
