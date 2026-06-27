@@ -1,0 +1,60 @@
+﻿Compiled from "BedWars.java"
+public interface com.andrei1058.bedwars.api.BedWars {
+  public abstract com.andrei1058.bedwars.api.BedWars$IStats getStatsUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$AFKUtil getAFKUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$ArenaUtil getArenaUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$Configs getConfigs();
+  public abstract com.andrei1058.bedwars.api.BedWars$ShopUtil getShopUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$TeamUpgradesUtil getTeamUpgradesUtil();
+  public abstract com.andrei1058.bedwars.api.levels.Level getLevelsUtil();
+  public abstract com.andrei1058.bedwars.api.party.Party getPartyUtil();
+  public abstract com.andrei1058.bedwars.api.server.ISetupSession getSetupSession(java.util.UUID);
+  public abstract boolean isInSetupSession(java.util.UUID);
+  public abstract com.andrei1058.bedwars.api.server.ServerType getServerType();
+  public abstract java.lang.String getLangIso(org.bukkit.entity.Player);
+  public abstract com.andrei1058.bedwars.api.command.ParentCommand getBedWarsCommand();
+  public abstract com.andrei1058.bedwars.api.server.RestoreAdapter getRestoreAdapter();
+  public abstract void setRestoreAdapter(com.andrei1058.bedwars.api.server.RestoreAdapter) throws java.lang.IllegalAccessError;
+  public abstract void setPartyAdapter(com.andrei1058.bedwars.api.party.Party);
+  public abstract com.andrei1058.bedwars.api.server.VersionSupport getVersionSupport();
+  public abstract com.andrei1058.bedwars.api.language.Language getDefaultLang();
+  public abstract java.lang.String getLobbyWorld();
+  public abstract java.lang.String getForCurrentVersion(java.lang.String, java.lang.String, java.lang.String);
+  public abstract void setLevelAdapter(com.andrei1058.bedwars.api.levels.Level);
+  public abstract boolean isAutoScale();
+  public abstract com.andrei1058.bedwars.api.language.Language getLanguageByIso(java.lang.String);
+  public abstract com.andrei1058.bedwars.api.language.Language getPlayerLanguage(org.bukkit.entity.Player);
+  public abstract java.io.File getAddonsPath();
+  public abstract com.andrei1058.bedwars.api.BedWars$ScoreboardUtil getScoreboardUtil();
+  public abstract boolean isShuttingDown();
+}
+Compiled from "BedWars.java"
+public interface com.andrei1058.bedwars.api.BedWars {
+  public abstract com.andrei1058.bedwars.api.BedWars$IStats getStatsUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$AFKUtil getAFKUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$ArenaUtil getArenaUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$Configs getConfigs();
+  public abstract com.andrei1058.bedwars.api.BedWars$ShopUtil getShopUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$TeamUpgradesUtil getTeamUpgradesUtil();
+  public abstract com.andrei1058.bedwars.api.levels.Level getLevelsUtil();
+  public abstract com.andrei1058.bedwars.api.party.Party getPartyUtil();
+  public abstract com.andrei1058.bedwars.api.server.ISetupSession getSetupSession(java.util.UUID);
+  public abstract boolean isInSetupSession(java.util.UUID);
+  public abstract com.andrei1058.bedwars.api.server.ServerType getServerType();
+  public abstract java.lang.String getLangIso(org.bukkit.entity.Player);
+  public abstract com.andrei1058.bedwars.api.command.ParentCommand getBedWarsCommand();
+  public abstract com.andrei1058.bedwars.api.server.RestoreAdapter getRestoreAdapter();
+  public abstract void setRestoreAdapter(com.andrei1058.bedwars.api.server.RestoreAdapter) throws java.lang.IllegalAccessError;
+  public abstract void setPartyAdapter(com.andrei1058.bedwars.api.party.Party);
+  public abstract com.andrei1058.bedwars.api.server.VersionSupport getVersionSupport();
+  public abstract com.andrei1058.bedwars.api.language.Language getDefaultLang();
+  public abstract java.lang.String getLobbyWorld();
+  public abstract java.lang.String getForCurrentVersion(java.lang.String, java.lang.String, java.lang.String);
+  public abstract void setLevelAdapter(com.andrei1058.bedwars.api.levels.Level);
+  public abstract boolean isAutoScale();
+  public abstract com.andrei1058.bedwars.api.language.Language getLanguageByIso(java.lang.String);
+  public abstract com.andrei1058.bedwars.api.language.Language getPlayerLanguage(org.bukkit.entity.Player);
+  public abstract java.io.File getAddonsPath();
+  public abstract com.andrei1058.bedwars.api.BedWars$ScoreboardUtil getScoreboardUtil();
+  public abstract boolean isShuttingDown();
+}

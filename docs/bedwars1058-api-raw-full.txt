@@ -1,0 +1,285 @@
+﻿Compiled from "BedWars.java"
+public interface com.andrei1058.bedwars.api.BedWars {
+  public abstract com.andrei1058.bedwars.api.BedWars$IStats getStatsUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$AFKUtil getAFKUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$ArenaUtil getArenaUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$Configs getConfigs();
+  public abstract com.andrei1058.bedwars.api.BedWars$ShopUtil getShopUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$TeamUpgradesUtil getTeamUpgradesUtil();
+  public abstract com.andrei1058.bedwars.api.levels.Level getLevelsUtil();
+  public abstract com.andrei1058.bedwars.api.party.Party getPartyUtil();
+  public abstract com.andrei1058.bedwars.api.server.ISetupSession getSetupSession(java.util.UUID);
+  public abstract boolean isInSetupSession(java.util.UUID);
+  public abstract com.andrei1058.bedwars.api.server.ServerType getServerType();
+  public abstract java.lang.String getLangIso(org.bukkit.entity.Player);
+  public abstract com.andrei1058.bedwars.api.command.ParentCommand getBedWarsCommand();
+  public abstract com.andrei1058.bedwars.api.server.RestoreAdapter getRestoreAdapter();
+  public abstract void setRestoreAdapter(com.andrei1058.bedwars.api.server.RestoreAdapter) throws java.lang.IllegalAccessError;
+  public abstract void setPartyAdapter(com.andrei1058.bedwars.api.party.Party);
+  public abstract com.andrei1058.bedwars.api.server.VersionSupport getVersionSupport();
+  public abstract com.andrei1058.bedwars.api.language.Language getDefaultLang();
+  public abstract java.lang.String getLobbyWorld();
+  public abstract java.lang.String getForCurrentVersion(java.lang.String, java.lang.String, java.lang.String);
+  public abstract void setLevelAdapter(com.andrei1058.bedwars.api.levels.Level);
+  public abstract boolean isAutoScale();
+  public abstract com.andrei1058.bedwars.api.language.Language getLanguageByIso(java.lang.String);
+  public abstract com.andrei1058.bedwars.api.language.Language getPlayerLanguage(org.bukkit.entity.Player);
+  public abstract java.io.File getAddonsPath();
+  public abstract com.andrei1058.bedwars.api.BedWars$ScoreboardUtil getScoreboardUtil();
+  public abstract boolean isShuttingDown();
+}
+Compiled from "BedWars.java"
+public interface com.andrei1058.bedwars.api.BedWars {
+  public abstract com.andrei1058.bedwars.api.BedWars$IStats getStatsUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$AFKUtil getAFKUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$ArenaUtil getArenaUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$Configs getConfigs();
+  public abstract com.andrei1058.bedwars.api.BedWars$ShopUtil getShopUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$TeamUpgradesUtil getTeamUpgradesUtil();
+  public abstract com.andrei1058.bedwars.api.levels.Level getLevelsUtil();
+  public abstract com.andrei1058.bedwars.api.party.Party getPartyUtil();
+  public abstract com.andrei1058.bedwars.api.server.ISetupSession getSetupSession(java.util.UUID);
+  public abstract boolean isInSetupSession(java.util.UUID);
+  public abstract com.andrei1058.bedwars.api.server.ServerType getServerType();
+  public abstract java.lang.String getLangIso(org.bukkit.entity.Player);
+  public abstract com.andrei1058.bedwars.api.command.ParentCommand getBedWarsCommand();
+  public abstract com.andrei1058.bedwars.api.server.RestoreAdapter getRestoreAdapter();
+  public abstract void setRestoreAdapter(com.andrei1058.bedwars.api.server.RestoreAdapter) throws java.lang.IllegalAccessError;
+  public abstract void setPartyAdapter(com.andrei1058.bedwars.api.party.Party);
+  public abstract com.andrei1058.bedwars.api.server.VersionSupport getVersionSupport();
+  public abstract com.andrei1058.bedwars.api.language.Language getDefaultLang();
+  public abstract java.lang.String getLobbyWorld();
+  public abstract java.lang.String getForCurrentVersion(java.lang.String, java.lang.String, java.lang.String);
+  public abstract void setLevelAdapter(com.andrei1058.bedwars.api.levels.Level);
+  public abstract boolean isAutoScale();
+  public abstract com.andrei1058.bedwars.api.language.Language getLanguageByIso(java.lang.String);
+  public abstract com.andrei1058.bedwars.api.language.Language getPlayerLanguage(org.bukkit.entity.Player);
+  public abstract java.io.File getAddonsPath();
+  public abstract com.andrei1058.bedwars.api.BedWars$ScoreboardUtil getScoreboardUtil();
+  public abstract boolean isShuttingDown();
+}
+Compiled from "BedWars.java"
+public interface com.andrei1058.bedwars.api.BedWars {
+  public abstract com.andrei1058.bedwars.api.BedWars$IStats getStatsUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$AFKUtil getAFKUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$ArenaUtil getArenaUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$Configs getConfigs();
+  public abstract com.andrei1058.bedwars.api.BedWars$ShopUtil getShopUtil();
+  public abstract com.andrei1058.bedwars.api.BedWars$TeamUpgradesUtil getTeamUpgradesUtil();
+  public abstract com.andrei1058.bedwars.api.levels.Level getLevelsUtil();
+  public abstract com.andrei1058.bedwars.api.party.Party getPartyUtil();
+  public abstract com.andrei1058.bedwars.api.server.ISetupSession getSetupSession(java.util.UUID);
+  public abstract boolean isInSetupSession(java.util.UUID);
+  public abstract com.andrei1058.bedwars.api.server.ServerType getServerType();
+  public abstract java.lang.String getLangIso(org.bukkit.entity.Player);
+  public abstract com.andrei1058.bedwars.api.command.ParentCommand getBedWarsCommand();
+  public abstract com.andrei1058.bedwars.api.server.RestoreAdapter getRestoreAdapter();
+  public abstract void setRestoreAdapter(com.andrei1058.bedwars.api.server.RestoreAdapter) throws java.lang.IllegalAccessError;
+  public abstract void setPartyAdapter(com.andrei1058.bedwars.api.party.Party);
+  public abstract com.andrei1058.bedwars.api.server.VersionSupport getVersionSupport();
+  public abstract com.andrei1058.bedwars.api.language.Language getDefaultLang();
+  public abstract java.lang.String getLobbyWorld();
+  public abstract java.lang.String getForCurrentVersion(java.lang.String, java.lang.String, java.lang.String);
+  public abstract void setLevelAdapter(com.andrei1058.bedwars.api.levels.Level);
+  public abstract boolean isAutoScale();
+  public abstract com.andrei1058.bedwars.api.language.Language getLanguageByIso(java.lang.String);
+  public abstract com.andrei1058.bedwars.api.language.Language getPlayerLanguage(org.bukkit.entity.Player);
+  public abstract java.io.File getAddonsPath();
+  public abstract com.andrei1058.bedwars.api.BedWars$ScoreboardUtil getScoreboardUtil();
+  public abstract boolean isShuttingDown();
+}
+Compiled from "IArena.java"
+public interface com.andrei1058.bedwars.api.arena.IArena {
+  public abstract boolean isSpectator(org.bukkit.entity.Player);
+  public abstract boolean isSpectator(java.util.UUID);
+  public abstract boolean isReSpawning(java.util.UUID);
+  public abstract java.lang.String getArenaName();
+  public abstract void init(org.bukkit.World);
+  public abstract com.andrei1058.bedwars.api.configuration.ConfigManager getConfig();
+  public abstract boolean isPlayer(org.bukkit.entity.Player);
+  public abstract java.util.List<org.bukkit.entity.Player> getSpectators();
+  public abstract com.andrei1058.bedwars.api.arena.team.ITeam getTeam(org.bukkit.entity.Player);
+  public abstract com.andrei1058.bedwars.api.arena.team.ITeam getExTeam(java.util.UUID);
+  public abstract java.lang.String getDisplayName();
+  public abstract void setWorldName(java.lang.String);
+  public abstract com.andrei1058.bedwars.api.arena.GameState getStatus();
+  public abstract java.util.List<org.bukkit.entity.Player> getPlayers();
+  public abstract int getMaxPlayers();
+  public abstract java.lang.String getGroup();
+  public abstract int getMaxInTeam();
+  public abstract java.util.concurrent.ConcurrentHashMap<org.bukkit.entity.Player, java.lang.Integer> getRespawnSessions();
+  public abstract void updateSpectatorCollideRule(org.bukkit.entity.Player, boolean);
+  public abstract void updateNextEvent();
+  public abstract boolean addPlayer(org.bukkit.entity.Player, boolean);
+  public abstract boolean addSpectator(org.bukkit.entity.Player, boolean, org.bukkit.Location);
+  public abstract void removePlayer(org.bukkit.entity.Player, boolean);
+  public abstract void removeSpectator(org.bukkit.entity.Player, boolean);
+  public abstract boolean reJoin(org.bukkit.entity.Player);
+  public abstract void disable();
+  public abstract void restart();
+  public abstract org.bukkit.World getWorld();
+  public abstract java.lang.String getDisplayStatus(com.andrei1058.bedwars.api.language.Language);
+  public abstract java.lang.String getDisplayGroup(org.bukkit.entity.Player);
+  public abstract java.lang.String getDisplayGroup(com.andrei1058.bedwars.api.language.Language);
+  public abstract java.util.List<com.andrei1058.bedwars.api.arena.team.ITeam> getTeams();
+  public abstract void addPlacedBlock(org.bukkit.block.Block);
+  public abstract java.util.Map<java.util.UUID, java.lang.Long> getFireballCooldowns();
+  public abstract void removePlacedBlock(org.bukkit.block.Block);
+  public abstract boolean isBlockPlaced(org.bukkit.block.Block);
+  public abstract int getPlayerKills(org.bukkit.entity.Player, boolean);
+  public abstract int getPlayerBedsDestroyed(org.bukkit.entity.Player);
+  public abstract java.util.List<org.bukkit.block.Block> getSigns();
+  public abstract int getIslandRadius();
+  public abstract void setGroup(java.lang.String);
+  public abstract void setStatus(com.andrei1058.bedwars.api.arena.GameState);
+  public abstract void changeStatus(com.andrei1058.bedwars.api.arena.GameState);
+  public default boolean isRespawning(org.bukkit.entity.Player);
+  public abstract void addSign(org.bukkit.Location);
+  public abstract void refreshSigns();
+  public abstract void addPlayerKill(org.bukkit.entity.Player, boolean, org.bukkit.entity.Player);
+  public abstract void addPlayerBedDestroyed(org.bukkit.entity.Player);
+  public abstract com.andrei1058.bedwars.api.arena.team.ITeam getPlayerTeam(java.lang.String);
+  public abstract void checkWinner();
+  public abstract void addPlayerDeath(org.bukkit.entity.Player);
+  public abstract void setNextEvent(com.andrei1058.bedwars.api.arena.NextEvent);
+  public abstract com.andrei1058.bedwars.api.arena.NextEvent getNextEvent();
+  public abstract void sendPreGameCommandItems(org.bukkit.entity.Player);
+  public abstract void sendSpectatorCommandItems(org.bukkit.entity.Player);
+  public abstract com.andrei1058.bedwars.api.arena.team.ITeam getTeam(java.lang.String);
+  public abstract com.andrei1058.bedwars.api.tasks.StartingTask getStartingTask();
+  public abstract com.andrei1058.bedwars.api.tasks.PlayingTask getPlayingTask();
+  public abstract com.andrei1058.bedwars.api.tasks.RestartingTask getRestartingTask();
+  public abstract java.util.List<com.andrei1058.bedwars.api.arena.generator.IGenerator> getOreGenerators();
+  public abstract java.util.List<java.lang.String> getNextEvents();
+  public abstract int getPlayerDeaths(org.bukkit.entity.Player, boolean);
+  public abstract void sendDiamondsUpgradeMessages();
+  public abstract void sendEmeraldsUpgradeMessages();
+  public abstract java.util.LinkedList<org.bukkit.util.Vector> getPlaced();
+  public abstract void destroyData();
+  public abstract int getUpgradeDiamondsCount();
+  public abstract int getUpgradeEmeraldsCount();
+  public abstract java.util.List<com.andrei1058.bedwars.api.region.Region> getRegionsList();
+  public abstract java.util.concurrent.ConcurrentHashMap<org.bukkit.entity.Player, java.lang.Integer> getShowTime();
+  public abstract void setAllowSpectate(boolean);
+  public abstract boolean isAllowSpectate();
+  public abstract java.lang.String getWorldName();
+  public abstract int getRenderDistance();
+  public abstract boolean startReSpawnSession(org.bukkit.entity.Player, int);
+  public abstract boolean isReSpawning(org.bukkit.entity.Player);
+  public abstract org.bukkit.Location getReSpawnLocation();
+  public abstract org.bukkit.Location getSpectatorLocation();
+  public abstract org.bukkit.Location getWaitingLocation();
+  public abstract boolean isProtected(org.bukkit.Location);
+  public abstract void abandonGame(org.bukkit.entity.Player);
+  public abstract int getYKillHeight();
+  public abstract java.time.Instant getStartTime();
+  public abstract com.andrei1058.bedwars.api.arena.team.ITeamAssigner getTeamAssigner();
+  public abstract void setTeamAssigner(com.andrei1058.bedwars.api.arena.team.ITeamAssigner);
+  public abstract java.util.List<org.bukkit.entity.Player> getLeavingPlayers();
+}
+Compiled from "ICategoryContent.java"
+public interface com.andrei1058.bedwars.api.arena.shop.ICategoryContent {
+  public abstract int getSlot();
+  public abstract org.bukkit.inventory.ItemStack getItemStack(org.bukkit.entity.Player);
+  public abstract boolean hasQuick(org.bukkit.entity.Player);
+  public abstract boolean isPermanent();
+  public abstract boolean isDowngradable();
+  public abstract java.lang.String getIdentifier();
+  public abstract java.util.List<com.andrei1058.bedwars.api.arena.shop.IContentTier> getContentTiers();
+}
+Compiled from "IBuyItem.java"
+public interface com.andrei1058.bedwars.api.arena.shop.IBuyItem {
+  public abstract boolean isLoaded();
+  public abstract void give(org.bukkit.entity.Player, com.andrei1058.bedwars.api.arena.IArena);
+  public abstract java.lang.String getUpgradeIdentifier();
+  public abstract org.bukkit.inventory.ItemStack getItemStack();
+  public abstract void setItemStack(org.bukkit.inventory.ItemStack);
+  public abstract boolean isAutoEquip();
+  public abstract void setAutoEquip(boolean);
+  public abstract boolean isPermanent();
+  public abstract void setPermanent(boolean);
+}
+Compiled from "IContentTier.java"
+public interface com.andrei1058.bedwars.api.arena.shop.IContentTier {
+  public abstract int getPrice();
+  public abstract org.bukkit.Material getCurrency();
+  public abstract void setCurrency(org.bukkit.Material);
+  public abstract void setPrice(int);
+  public abstract void setItemStack(org.bukkit.inventory.ItemStack);
+  public abstract void setBuyItemsList(java.util.List<com.andrei1058.bedwars.api.arena.shop.IBuyItem>);
+  public abstract org.bukkit.inventory.ItemStack getItemStack();
+  public abstract int getValue();
+  public abstract java.util.List<com.andrei1058.bedwars.api.arena.shop.IBuyItem> getBuyItemsList();
+}
+Compiled from "ITeam.java"
+public interface com.andrei1058.bedwars.api.arena.team.ITeam {
+  public abstract com.andrei1058.bedwars.api.arena.team.TeamColor getColor();
+  public abstract java.lang.String getName();
+  public abstract java.lang.String getDisplayName(com.andrei1058.bedwars.api.language.Language);
+  public abstract boolean isMember(org.bukkit.entity.Player);
+  public abstract com.andrei1058.bedwars.api.arena.IArena getArena();
+  public abstract java.util.List<org.bukkit.entity.Player> getMembers();
+  public abstract void defaultSword(org.bukkit.entity.Player, boolean);
+  public abstract org.bukkit.Location getBed();
+  public abstract java.util.concurrent.ConcurrentHashMap<java.lang.String, java.lang.Integer> getTeamUpgradeTiers();
+  public abstract java.util.List<com.andrei1058.bedwars.api.arena.team.TeamEnchant> getBowsEnchantments();
+  public abstract java.util.List<com.andrei1058.bedwars.api.arena.team.TeamEnchant> getSwordsEnchantments();
+  public abstract java.util.List<com.andrei1058.bedwars.api.arena.team.TeamEnchant> getArmorsEnchantments();
+  public abstract int getSize();
+  public abstract void addPlayers(org.bukkit.entity.Player...);
+  public abstract void firstSpawn(org.bukkit.entity.Player);
+  public abstract void spawnNPCs();
+  public abstract void reJoin(org.bukkit.entity.Player);
+  public abstract void reJoin(org.bukkit.entity.Player, int);
+  public abstract void sendDefaultInventory(org.bukkit.entity.Player, boolean);
+  public abstract void respawnMember(org.bukkit.entity.Player);
+  public abstract void sendArmor(org.bukkit.entity.Player);
+  public abstract void addTeamEffect(org.bukkit.potion.PotionEffectType, int, int);
+  public abstract void addBaseEffect(org.bukkit.potion.PotionEffectType, int, int);
+  public abstract java.util.List<org.bukkit.potion.PotionEffect> getBaseEffects();
+  public abstract void addBowEnchantment(org.bukkit.enchantments.Enchantment, int);
+  public abstract void addSwordEnchantment(org.bukkit.enchantments.Enchantment, int);
+  public abstract void addArmorEnchantment(org.bukkit.enchantments.Enchantment, int);
+  public abstract boolean wasMember(java.util.UUID);
+  public abstract boolean isBedDestroyed();
+  public abstract org.bukkit.Location getSpawn();
+  public abstract org.bukkit.Location getShop();
+  public abstract org.bukkit.Location getTeamUpgrades();
+  public abstract void setBedDestroyed(boolean);
+  public abstract com.andrei1058.bedwars.api.arena.generator.IGenerator getIronGenerator();
+  public abstract com.andrei1058.bedwars.api.arena.generator.IGenerator getGoldGenerator();
+  public abstract com.andrei1058.bedwars.api.arena.generator.IGenerator getEmeraldGenerator();
+  public abstract void setEmeraldGenerator(com.andrei1058.bedwars.api.arena.generator.IGenerator);
+  public abstract java.util.List<com.andrei1058.bedwars.api.arena.generator.IGenerator> getGenerators();
+  public abstract int getDragons();
+  public abstract void setDragons(int);
+  public abstract java.util.List<org.bukkit.entity.Player> getMembersCache();
+  public abstract void destroyData();
+  public abstract void destroyBedHolo(org.bukkit.entity.Player);
+  public abstract java.util.LinkedList<com.andrei1058.bedwars.api.upgrades.EnemyBaseEnterTrap> getActiveTraps();
+  public abstract org.bukkit.util.Vector getKillDropsLocation();
+  public abstract void setKillDropsLocation(org.bukkit.util.Vector);
+}
+Compiled from "ShopOpenEvent.java"
+public class com.andrei1058.bedwars.api.events.shop.ShopOpenEvent extends org.bukkit.event.Event {
+  public com.andrei1058.bedwars.api.events.shop.ShopOpenEvent(org.bukkit.entity.Player);
+  public com.andrei1058.bedwars.api.events.shop.ShopOpenEvent(org.bukkit.entity.Player, com.andrei1058.bedwars.api.arena.IArena);
+  public com.andrei1058.bedwars.api.arena.IArena getArena();
+  public org.bukkit.entity.Player getPlayer();
+  public void setCancelled(boolean);
+  public boolean isCancelled();
+  public org.bukkit.event.HandlerList getHandlers();
+  public static org.bukkit.event.HandlerList getHandlerList();
+}
+Compiled from "ShopBuyEvent.java"
+public class com.andrei1058.bedwars.api.events.shop.ShopBuyEvent extends org.bukkit.event.Event implements org.bukkit.event.Cancellable {
+  public com.andrei1058.bedwars.api.events.shop.ShopBuyEvent(org.bukkit.entity.Player, com.andrei1058.bedwars.api.arena.shop.ICategoryContent);
+  public com.andrei1058.bedwars.api.events.shop.ShopBuyEvent(org.bukkit.entity.Player, com.andrei1058.bedwars.api.arena.IArena, com.andrei1058.bedwars.api.arena.shop.ICategoryContent);
+  public com.andrei1058.bedwars.api.arena.IArena getArena();
+  public org.bukkit.entity.Player getBuyer();
+  public com.andrei1058.bedwars.api.arena.shop.ICategoryContent getCategoryContent();
+  public org.bukkit.event.HandlerList getHandlers();
+  public static org.bukkit.event.HandlerList getHandlerList();
+  public boolean isCancelled();
+  public void setCancelled(boolean);
+}
