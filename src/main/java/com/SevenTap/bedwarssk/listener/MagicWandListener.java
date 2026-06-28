@@ -3,12 +3,14 @@ package com.SevenTap.bedwarssk.listener;
 import com.SevenTap.bedwarssk.BedwarsSKPlugin;
 import com.SevenTap.bedwarssk.Role;
 import com.SevenTap.bedwarssk.game.GameManager;
+import com.SevenTap.bedwarssk.item.MagicShopRegistrar;
 import com.SevenTap.bedwarssk.item.MagicWandManager;
 import com.SevenTap.bedwarssk.item.MagicWandType;
 import com.SevenTap.bedwarssk.message.MessageSender;
 import com.andrei1058.bedwars.api.arena.IArena;
 import com.andrei1058.bedwars.api.arena.shop.ICategoryContent;
 import com.andrei1058.bedwars.api.events.shop.ShopBuyEvent;
+import com.andrei1058.bedwars.api.events.shop.ShopOpenEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -26,13 +28,15 @@ public class MagicWandListener implements Listener {
     private final GameManager gameManager;
     private final MagicWandManager wandManager;
     private final MessageSender messageSender;
+    private final MagicShopRegistrar magicShopRegistrar;
     private final Map<String, Long> cooldownMap = new HashMap<>();
 
-    public MagicWandListener(BedwarsSKPlugin plugin, GameManager gameManager, MagicWandManager wandManager, MessageSender messageSender) {
+    public MagicWandListener(BedwarsSKPlugin plugin, GameManager gameManager, MagicWandManager wandManager, MessageSender messageSender, MagicShopRegistrar magicShopRegistrar) {
         this.plugin = plugin;
         this.gameManager = gameManager;
         this.wandManager = wandManager;
         this.messageSender = messageSender;
+        this.magicShopRegistrar = magicShopRegistrar;
     }
 
     @EventHandler
@@ -101,6 +105,13 @@ public class MagicWandListener implements Listener {
         executeWandEffect(attacker, victim, attackerRole, victimRole, wandType);
         cooldownMap.put(pairKey, now);
         attacker.setItemInHand(null);
+    }
+
+    @EventHandler
+    public void onShopOpen(ShopOpenEvent event) {
+        if (magicShopRegistrar != null) {
+            magicShopRegistrar.registerIfAvailable();
+        }
     }
 
     @EventHandler
