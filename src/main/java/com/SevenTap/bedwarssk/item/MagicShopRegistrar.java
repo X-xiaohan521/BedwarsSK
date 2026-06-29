@@ -114,7 +114,7 @@ public class MagicShopRegistrar {
                 wandManager.getCategorySlot(),
                 wandManager.getCategoryIcon().name(),
                 1,
-                0,
+                1,
                 false
         );
     }
