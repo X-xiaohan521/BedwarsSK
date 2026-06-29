@@ -63,3 +63,122 @@ messages:
     use.level3.attacker-sound: ANVIL_LAND
     use.level3.victim-sound: CLICK
     cooldown-failed: ENDERMAN_TELEPORT
+
+shop:
+  item:
+    magic-category:
+      category-slot: 8
+      category-item:
+        material: REDSTONE_TORCH_ON
+        data: 0
+        amount: 1
+        enchanted: false
+        name: '&c&l魔法道具'
+        lore:
+          - '&7三国杀身份特殊道具'
+      category-content:
+        level1-wand:
+          content-settings:
+            content-slot: 19
+            is-permanent: false
+            is-downgradable: false
+          content-tiers:
+            tier1:
+              tier-item:
+                material: STONE_HOE
+                data: 0
+                amount: 1
+                enchanted: false
+              tier-settings:
+                cost: 3
+                currency: emerald
+              buy-items:
+                level1-wand:
+                  material: STONE_HOE
+                  data: 0
+                  amount: 1
+                  name: '&a&l一级魔法之杖'
+                  lore:
+                    - '&7[BedwarsSK 魔法道具]'
+                    - '&8/bwsk-magicwand'
+        level2-wand:
+          content-settings:
+            content-slot: 20
+            is-permanent: false
+            is-downgradable: false
+          content-tiers:
+            tier1:
+              tier-item:
+                material: GOLD_HOE
+                data: 0
+                amount: 1
+                enchanted: false
+              tier-settings:
+                cost: 5
+                currency: emerald
+              buy-items:
+                level2-wand:
+                  material: GOLD_HOE
+                  data: 0
+                  amount: 1
+                  name: '&e&l二级魔法之杖'
+                  lore:
+                    - '&7[BedwarsSK 魔法道具]'
+                    - '&8/bwsk-magicwand'
+        level3-wand:
+          content-settings:
+            content-slot: 21
+            is-permanent: false
+            is-downgradable: false
+          content-tiers:
+            tier1:
+              tier-item:
+                material: DIAMOND_HOE
+                data: 0
+                amount: 1
+                enchanted: false
+              tier-settings:
+                cost: 9
+                currency: emerald
+              buy-items:
+                level3-wand:
+                  material: DIAMOND_HOE
+                  data: 0
+                  amount: 1
+                  name: '&b&l三级魔法之杖'
+                  lore:
+                    - '&7[BedwarsSK 魔法道具]'
+                    - '&8/bwsk-magicwand'
+  message:
+    magic-category:
+      content-item-level1-wand-name: '&a&l一级魔法之杖'
+      content-item-level1-wand-lore:
+        - '&7Cost: {cost} {currency}'
+        - ''
+        - '&7近战攻击其他玩家后'
+        - '&7提供对方身份的少量线索'
+        - ''
+        - '{quick_buy}'
+        - '{buy_status}'
+      content-item-level2-wand-name: '&e&l二级魔法之杖'
+      content-item-level2-wand-lore:
+        - '&7Cost: {cost} {currency}'
+        - ''
+        - '&7近战攻击其他玩家后'
+        - '&7提供对方身份的一定量线索'
+        - ''
+        - '{quick_buy}'
+        - '{buy_status}'
+      content-item-level3-wand-name: '&b&l三级魔法之杖'
+      content-item-level3-wand-lore:
+        - '&7Cost: {cost} {currency}'
+        - ''
+        - '&7近战攻击其他玩家后'
+        - '&7直接揭露对方身份'
+        - ''
+        - '{quick_buy}'
+        - '{buy_status}'
+      inventory-name: '&8Magic'
+      category-item-name: '&8Magic'
+      category-item-lore:
+        - '&eClick to view!'
