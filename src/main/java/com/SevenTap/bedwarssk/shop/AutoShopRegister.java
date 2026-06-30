@@ -32,8 +32,7 @@ public class AutoShopRegister {
             return;
         }
         Object magicCategory = config.get("shop.item.magic-category");
-        shopManager.set("magic-category", magicCategory);
-        shopManager.reload();
+        shopConfig.set("magic-category", magicCategory);
         plugin.getLogger().info("魔法道具栏注册成功。");
     }
 
@@ -44,8 +43,7 @@ public class AutoShopRegister {
             return;
         }
         Object magicLocale = config.get("shop.message.magic-category");
-        defaultLocale.set("shop-items-messages.magic-category", magicLocale);
-        defaultLocale.reload();
+        localeConfig.set("shop-items-messages.magic-category", magicLocale);
         plugin.getLogger().info("魔法道具本地化注册成功。");
     }
 }
