@@ -25,8 +25,8 @@ public class AutoShopRegister {
         boolean isScRegistered = registerShopCategory();
         boolean isLocaleRegistered = registerDefaultLocale();
         if (isScRegistered || isLocaleRegistered) {
-            plugin.getLogger().warning("魔法道具注册成功，重启服务器中...");
-            Bukkit.getServer().reload();
+            plugin.getLogger().warning("魔法道具注册成功，等待服务器启动完毕后自动重启...");
+            Bukkit.getScheduler().runTaskLater(plugin, Bukkit.getServer()::reload, 3 * 20L);   // 等待服务器加载完成后，再延迟 3 秒重启
         }
     }
 
